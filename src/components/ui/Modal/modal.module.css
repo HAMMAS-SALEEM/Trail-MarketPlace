@@ -1,0 +1,25 @@
+.anmiateModal {
+    animation: modal-animate 0.3s forwards;
+  }
+  .reverse-anmiate-modal {
+    animation: reverse-modal-animate 1s forwards;
+  }
+  
+  @keyframes modal-animate {
+    0% {
+      opacity: 0%;
+    }
+    100% {
+      opacity: 100%;
+    }
+  }
+  
+  @keyframes reverse-modal-animate {
+    0% {
+      opacity: 100%;
+    }
+    100% {
+      opacity: 0%;
+    }
+  }
+  
