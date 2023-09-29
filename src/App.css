@@ -1,0 +1,58 @@
+body {
+    /* background: rgb(83, 170, 221); */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+#main-logo {
+    width: 1.5in;
+}
+
+.social-icons-container {
+    display: flex;
+    width: 250px;
+    justify-content: space-around;
+}
+
+.social-icons {
+    width: 0.5in;
+}
+
+.trail-main-heading-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.trail-main-heading {
+    width: 60%;
+}
+
+.granite-access-btn-container,
+.general-store-container {
+    display: flex;
+    justify-content: center;
+}
+
+.granite-access-btn {
+    width: 20%;
+}
+
+.general-store {
+    width: 60%;
+}
+
+.user-account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-wallet {
+    font-weight: bold;
+    font-size: 28px;
+}
