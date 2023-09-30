@@ -1,5 +1,5 @@
 body {
-    /* background: rgb(83, 170, 221); */
+  background: rgb(83, 170, 221);
 }
 
 .navbar {
@@ -55,4 +55,13 @@ body {
 .user-wallet {
     font-weight: bold;
     font-size: 28px;
+}
+
+.items-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.single-item-img {
+  width: 300px;
 }
