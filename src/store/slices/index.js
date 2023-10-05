@@ -1,9 +1,5 @@
-import AuthSlice from "./authSlice"
-import NoteSlice from './noteSlice'
-import TodoSlice from './todoSlice'
+import ItemSlice from "./itemSlice"
 
 export const rootReducer ={
-    Auth: AuthSlice, 
-    NoteBook: NoteSlice,
-    Todo: TodoSlice
+    Item: ItemSlice,
 }
