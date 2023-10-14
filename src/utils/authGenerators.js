@@ -27,7 +27,7 @@ export const getToken = async (code, codeVerifier) => {
         },
       }
     );
-    document.cookie = `accessToken=${response.data.access_token};max-age=3600`;
+    document.cookie = `accessToken=${response.data.access_token};max-age=3600;path=/; SameSite=None; Secure`;
   } catch (error) {
     console.error(error);
   }
