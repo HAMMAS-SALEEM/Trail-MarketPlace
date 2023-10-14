@@ -21,7 +21,11 @@ export const GraniteAccess = () => {
   };
 
   useEffect(() => {
-    generateLink();
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+    if (!code) {
+      generateLink();
+    }
   }, []);
 
   return (
