@@ -1,15 +1,5 @@
 import axios from "axios";
-
-const dec2hex = (dec) => {
-  return ("0" + dec.toString(16)).substr(-2);
-};
-
-//generate code verifier
-export const generateCodeVerifier = () => {
-  let array = new Uint32Array(56 / 2);
-  window.crypto.getRandomValues(array);
-  return Array.from(array, dec2hex).join("");
-};
+import CryptoJS from "crypto-js";
 
 //generate code challenge
 export const generateCodeChallenge = async (codeVerifier) => {
@@ -53,4 +43,19 @@ export const getToken = async (code, codeVerifier) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const generateCodeVerifier = () => {
+  const rand = new Uint8Array(32);
+  crypto.getRandomValues(rand);
+  const code_verifier = base64URL(new CryptoJS.lib.WordArray.init(rand));
+  return code_verifier;
+};
+
+const base64URL = (string) => {
+  return string
+    .toString(CryptoJS.enc.Base64)
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
 };
