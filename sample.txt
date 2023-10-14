@@ -1,0 +1,1 @@
+https://auth.trailmarket.xyz/oauth/granite/callback?code=vCx0kBwql8iE6YLBKneYiLj91Gvy9ZvC9Mxdz1yiVh5&iss=https%3A%2F%2Fgranite-platform.herokuapp.com%2F
