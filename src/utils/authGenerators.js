@@ -1,17 +1,6 @@
 import axios from "axios";
 import CryptoJS from "crypto-js";
 
-//generate code challenge
-export const generateCodeChallenge = async (codeVerifier) => {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(codeVerifier);
-  const buffer = await window.crypto.subtle.digest("SHA-256", data);
-  return btoa(String.fromCharCode(...new Uint8Array(buffer)))
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
-};
-
 //get the token by code
 export const getToken = async (code, codeVerifier) => {
   const params = {
@@ -38,8 +27,7 @@ export const getToken = async (code, codeVerifier) => {
         },
       }
     );
-
-    localStorage.setItem("accessToken", response.data.access_token);
+    document.cookie = `accessToken=${response.data.access_token};max-age=3600`;
   } catch (error) {
     console.error(error);
   }
@@ -58,4 +46,9 @@ const base64URL = (string) => {
     .replace(/=/g, "")
     .replace(/\+/g, "-")
     .replace(/\//g, "_");
+};
+
+//generate code challenge
+export const generateCodeChallenge = async (codeVerifier) => {
+  return base64URL(CryptoJS.SHA256(codeVerifier));
 };
