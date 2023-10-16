@@ -1,33 +1,15 @@
-import { useEffect } from "react";
-import "./App.css";
-import { GeneralStore } from "./components/GeneralStore";
-import { GraniteAccess } from "./components/GraniteAccess";
-import { Items } from "./components/Items";
-import { Navbar } from "./components/Navbar";
-import { TrailMainHeading } from "./components/TrailMainHeading";
-import { UserAccount } from "./components/UserAccount";
-import { getToken } from "./utils/authGenerators";
+import React from 'react'
+import './App.css'
+import { Login } from './views/LoginView/Login';
+import { Home } from './views/HomeView/Home'
 
-const App = () => {
-  //get the code from the url
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-    if (code) {
-      getToken(code, localStorage.getItem("codeVerifier"));
-    }
-  }, []);
-
+export const App = () => {
   return (
     <>
-      <Navbar />
-      <TrailMainHeading />
-      <GraniteAccess />
-      <GeneralStore />
-      <UserAccount />
-      <Items />
+      <Login />
+      <Home />
     </>
-  );
+  )
 };
 
 export default App;
