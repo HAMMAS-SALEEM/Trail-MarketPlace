@@ -4,6 +4,7 @@ import { Login } from './views/Login';
 import { Home } from './views/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './routing/ProtectedRoutes';
+import PublicRoutes from './routing/PublicRoutes';
 
 export const App = () => {
   return (
@@ -15,7 +16,11 @@ export const App = () => {
         </ProtectedRoutes>
       }
       />
-      <Route path='/login' element={<Login />} />
+      <Route path='/login' element={
+        <PublicRoutes>
+          <Login />
+          </PublicRoutes>
+      } />
     </Routes>
     </BrowserRouter>
   )

@@ -1,6 +1,5 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-// import { useCurrentuser } from "../controllers/authContoller"
 import { Home } from '../views/Home'
 
 
