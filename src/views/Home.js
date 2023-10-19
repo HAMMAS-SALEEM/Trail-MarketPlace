@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { GeneralStore } from "../../components/GeneralStore";
-import { GraniteAccess } from "../../components/GraniteAccess";
-import { Items } from "../../components/Items";
-import { Navbar } from "../../components/Navbar";
-import { TrailMainHeading } from "../../components/TrailMainHeading";
-import { UserAccount } from "../../components/UserAccount";
-import { getToken } from "../../utils/authGenerators";
+import { GeneralStore } from "../components/GeneralStore";
+import { GraniteAccess } from "../components/GraniteAccess";
+import { Items } from "../components/Items";
+import { Navbar } from "../components/Navbar";
+import { TrailMainHeading } from "../components/TrailMainHeading";
+import { UserAccount } from "../components/UserAccount";
+import { getToken } from "../utils/authGenerators";
 
 export const Home = () => {
   //get the code from the url

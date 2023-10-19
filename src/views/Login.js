@@ -1,5 +1,5 @@
 import React from 'react'
-import { GraniteAccess } from '../../components/GraniteAccess'
+import { GraniteAccess } from '../components/GraniteAccess'
 
 export const Login = () => {
   return (
