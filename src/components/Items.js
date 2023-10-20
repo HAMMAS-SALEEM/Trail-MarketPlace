@@ -6,7 +6,6 @@ export const Items = () => {
   const [data, setData] = useState(null)
     const fetchData = async () => {
       const res = await axios.get('https://trailmarket.up.railway.app/api/products')
-      console.log(res.data.data)
       setData(res.data.data)
     }
     useEffect(() => {

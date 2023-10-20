@@ -3,9 +3,8 @@ import { Navigate } from "react-router-dom";
 import { Home } from '../views/Home'
 
 
-const ProtectedRoutes = () => {
-  const user = true;
-  return user ? <Home/> : <Navigate to='/login' />
+const ProtectedRoutes = ({session}) => {
+  return session ? <Home/> : <Navigate to='/login' />
 };
 
 export default ProtectedRoutes;
