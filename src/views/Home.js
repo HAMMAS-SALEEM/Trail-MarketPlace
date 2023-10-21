@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { GeneralStore } from "../components/GeneralStore";
 import { GraniteAccess } from "../components/GraniteAccess";
-import { Items } from "../components/Items";
+import { Products } from "../components/Products";
 import { Navbar } from "../components/Navbar";
 import { TrailMainHeading } from "../components/TrailMainHeading";
 import { UserAccount } from "../components/UserAccount";
@@ -24,7 +24,7 @@ export const Home = () => {
       <GraniteAccess />
       <GeneralStore />
       <UserAccount />
-      <Items />
+      <Products />
     </>
   );
 };

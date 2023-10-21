@@ -1,5 +1,5 @@
-import ItemSlice from "./itemSlice"
+import ProductsSlice from "./productsSlice"
 
 export const rootReducer ={
-    Item: ItemSlice,
+    Products: ProductsSlice,
 }
