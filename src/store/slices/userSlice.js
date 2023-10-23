@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { getCookie } from "../../utils/getCookie";
 
-const accessToken = 'CAPEyrWZ_8UcSknaSwc2P3Ed-UeFpspvUI_GacJh1xy'
+const accessToken = getCookie('accessToken');
 
 export const fetchUser = createAsyncThunk('user/fetch', async () => {
   const user = await fetch('https://api.graniteaccess.xyz/oidc/me', {
@@ -10,7 +10,6 @@ export const fetchUser = createAsyncThunk('user/fetch', async () => {
       },
       method: 'POST'
   })
-  console.log(user);
   return user.json();
 })
 

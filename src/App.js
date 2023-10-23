@@ -5,17 +5,17 @@ import { Home } from './views/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './routing/ProtectedRoutes';
 import PublicRoutes from './routing/PublicRoutes';
-// import { getCookie } from './utils/getCookie';
+import { getCookie } from './utils/getCookie';
 
 export const App = () => {
   const [session, setSession] = useState(false);
-  // const cookie = getCookie('refreshToken');
-  const refreshToken = JSON.parse(localStorage.getItem('refreshToken'));
-  console.log(refreshToken)
+  const accessToken = getCookie('accessToken');
+  // const refreshToken = JSON.parse(localStorage.getItem('refreshToken'));
+  // console.log(refreshToken)
   
   useEffect(() => {
-    refreshToken ? setSession(true) : setSession(false);
-  }, [refreshToken])
+    accessToken ? setSession(true) : setSession(false);
+  }, [accessToken])
 
   return (
     <BrowserRouter>
