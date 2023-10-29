@@ -6,8 +6,17 @@ import { Navbar } from "../components/Navbar";
 import { TrailMainHeading } from "../components/TrailMainHeading";
 import { UserAccount } from "../components/UserAccount";
 import { getToken } from "../utils/authGenerators";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAccessToken } from "../store/slices/userSlice";
 
 export const Home = () => {
+  const store = useSelector(store => store)
+  const dispatch = useDispatch();
+
+  const handleAccessToken = () => {
+    dispatch(fetchAccessToken());
+  }
+
   //get the code from the url
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -25,6 +34,7 @@ export const Home = () => {
       <GeneralStore />
       <UserAccount />
       <Products />
+      <button type="button" onClick={handleAccessToken}>Access Token</button>
     </>
   );
 };

@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import './App.css';
 import { Login } from './views/Login';
-import { Home } from './views/Home'
+import { Home } from './views/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './routing/ProtectedRoutes';
 import PublicRoutes from './routing/PublicRoutes';
+import { useDispatch } from 'react-redux';
 import { getCookie } from './utils/getCookie';
+import { fetchAccessToken, fetchUser } from './store/slices/userSlice';
 
 export const App = () => {
+  const dispatch = useDispatch();
   const [session, setSession] = useState(false);
   const accessToken = getCookie('accessToken');
-  // const refreshToken = JSON.parse(localStorage.getItem('refreshToken'));
-  // console.log(refreshToken)
-  
+  const refreshToken = JSON.parse(localStorage.getItem('refreshToken'));
+
   useEffect(() => {
-    accessToken ? setSession(true) : setSession(false);
-  }, [accessToken])
+    if(accessToken) {
+      dispatch(fetchUser(accessToken))
+    } else if (refreshToken) {
+      dispatch(fetchAccessToken(refreshToken))
+    } else {
+      setSession(false);
+    }
+  }, [accessToken, refreshToken])
 
   return (
     <BrowserRouter>

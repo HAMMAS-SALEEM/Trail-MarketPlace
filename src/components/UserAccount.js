@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../store/slices/userSlice'
 import { fetchCurrency } from '../store/slices/currencySlice'
 
-
 export const UserAccount = () => {
   const dispatch = useDispatch()
-  // const user = useSelector(store => store.User);
-  const currency = useSelector(store => store.currency);
-  console.log(currency);
+  const store = useSelector(store => store);
+  console.log(store);
+  // const currency = useSelector(store => store.currency);
+  // console.log(currency);
 
   useEffect(()=>{
-    // dispatch(fetchUser());
+    dispatch(fetchUser());
     dispatch(fetchCurrency());
   }, [dispatch])
 

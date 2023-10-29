@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const userId = '08072c39-6f65-4f5a-b540-e045e87d9ca3';
+const userId = '81e31a45-d3f8-4433-b12c-d793ff8b0994';
 const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
-const url = `https://script.google.com/macros/s/AKfycbxPOGGESaK5wFOKCt1N3bNexeYNtBl3QKjG91lKLGBxB4U2D03AIpHR2crXd2Sj61rm/exec?key=${sheetsKey}&graniteUserId=${userId}`;
+const url = `https://script.google.com/macros/s/AKfycbxPOGGESaK5wFOKCt1N3bNexeYNtBl3QKjG91lKLGBxB4U2D03AIpHR2crXd2Sj61rm/exec?
+key=${sheetsKey}&
+graniteUserId=${userId}`;
 
 export const fetchCurrency = createAsyncThunk('fetch/currency', async () => {
     const currency = await fetch(url);
-    console.log(currency.json());
     return currency.json();
 })
 

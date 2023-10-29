@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NotFound = () => {
+const Error = () => {
   return (
     <div className="w-screen h-[70vh] md:h-screen flex flex-col gap-3 items-center justify-center">
       <img
@@ -17,4 +17,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Error;
