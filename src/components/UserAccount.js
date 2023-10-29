@@ -12,7 +12,7 @@ export const UserAccount = () => {
   // console.log(currency);
 
   useEffect(()=>{
-    dispatch(fetchUser());
+    // dispatch(fetchUser());
     dispatch(fetchCurrency());
   }, [dispatch])
 

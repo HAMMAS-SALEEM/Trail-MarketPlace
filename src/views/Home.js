@@ -8,9 +8,10 @@ import { UserAccount } from "../components/UserAccount";
 import { getToken } from "../utils/authGenerators";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAccessToken } from "../store/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
-  const store = useSelector(store => store)
+  const store = useSelector(store => store.User)
   const dispatch = useDispatch();
 
   const handleAccessToken = () => {

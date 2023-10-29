@@ -12,14 +12,17 @@ import { fetchAccessToken, fetchUser } from './store/slices/userSlice';
 export const App = () => {
   const dispatch = useDispatch();
   const [session, setSession] = useState(false);
+
   const accessToken = getCookie('accessToken');
   const refreshToken = JSON.parse(localStorage.getItem('refreshToken'));
 
   useEffect(() => {
     if(accessToken) {
-      dispatch(fetchUser(accessToken))
+      dispatch(fetchUser(accessToken));
+      setSession(true);
     } else if (refreshToken) {
-      dispatch(fetchAccessToken(refreshToken))
+      dispatch(fetchAccessToken(refreshToken));
+      setSession(true);
     } else {
       setSession(false);
     }
