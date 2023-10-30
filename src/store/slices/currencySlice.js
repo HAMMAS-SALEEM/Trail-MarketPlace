@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const userId = '81e31a45-d3f8-4433-b12c-d793ff8b0994';
+const userId = '1aa21774-5750-422e-970a-b31451e74bc5';
 const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
 const url = `https://script.google.com/macros/s/AKfycbxPOGGESaK5wFOKCt1N3bNexeYNtBl3QKjG91lKLGBxB4U2D03AIpHR2crXd2Sj61rm/exec?
 key=${sheetsKey}&
