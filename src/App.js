@@ -22,7 +22,7 @@ export const App = () => {
     }
     const interval = setInterval(() => {
       dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
-    }, 100000);
+    }, 3600000);
     return () => {
       clearInterval(interval)
     };
