@@ -6,13 +6,13 @@ import { fetchCurrency } from '../store/slices/currencySlice'
 
 export const UserAccount = () => {
   const dispatch = useDispatch()
-  const store = useSelector(store => store);
-  console.log(store);
-  // const currency = useSelector(store => store.currency);
-  // console.log(currency);
+  const user = useSelector(store => store.User);
+  const accessToken = JSON.parse(localStorage.getItem('userInfo')).access_token
+  const currency = useSelector(store => store.currency);
+  console.log(currency);
 
   useEffect(()=>{
-    // dispatch(fetchUser());
+    dispatch(fetchUser(accessToken));
     dispatch(fetchCurrency());
   }, [dispatch])
 
@@ -20,7 +20,7 @@ export const UserAccount = () => {
     <div className="user-account-container">
         <img src={balance} alt='balance' />
         <span>{}</span>
-        {/* <span className="user-wallet">{user.status === 'succeeded' && user.user.sub}</span> */}
+        <span className="user-wallet">{user.status === 'succeeded' && user.user.sub}</span>
     </div>
   )
 }

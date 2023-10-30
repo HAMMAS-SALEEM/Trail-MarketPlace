@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getCookie } from "../../utils/getCookie";
 
 export const fetchAccessToken = createAsyncThunk('user/access_token_fetch', async (refreshToken) => {
   const params = `grant_type=refresh_token&refresh_token=${refreshToken}&client_id=2xnSfHwFht2dQVek`;
-  console.log(params);
   const user = await fetch('https://api.graniteaccess.xyz/oidc/token', {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -54,7 +52,7 @@ const userSlice = createSlice({
     .addCase(fetchAccessToken.fulfilled, (state, action) => {
         state.access_token_status = 'succeeded'
         state.access_token = action.payload.accessToken
-        console.log(action.payload);
+        document.cookie = `accessToken=${action.payload.access_token};max-age=3600;path=/; SameSite=None; Secure`;
         localStorage.setItem('userInfo', JSON.stringify(action.payload));
         localStorage.setItem('refreshToken', JSON.stringify(action.payload.refresh_token));
     })
