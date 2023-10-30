@@ -13,20 +13,20 @@ export const App = () => {
   const dispatch = useDispatch();
   const [session, setSession] = useState(false);
 
-  const accessToken = getCookie('accessToken');
-  const refreshToken = JSON.parse(localStorage.getItem('refreshToken'));
-
   useEffect(() => {
-    if(accessToken) {
-      dispatch(fetchUser(accessToken));
-      setSession(true);
-    } else if (refreshToken) {
-      dispatch(fetchAccessToken(refreshToken));
-      setSession(true);
-    } else {
+    if (!JSON.parse(localStorage.getItem('refreshToken'))) {
       setSession(false);
+    } else {
+      dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
+      setSession(true);
     }
-  }, [accessToken, refreshToken])
+    const interval = setInterval(() => {
+      dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
+    }, 100000);
+    return () => {
+      clearInterval(interval)
+    };
+  }, [dispatch])
 
   return (
     <BrowserRouter>

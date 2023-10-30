@@ -8,13 +8,11 @@ export const UserAccount = () => {
   const dispatch = useDispatch()
   const user = useSelector(store => store.User);
   const accessToken = JSON.parse(localStorage.getItem('userInfo')).access_token
-  const currency = useSelector(store => store.currency);
-  console.log(currency);
 
   useEffect(()=>{
     dispatch(fetchUser(accessToken));
     dispatch(fetchCurrency());
-  }, [dispatch])
+  }, [dispatch, accessToken])
 
   return (
     <div className="user-account-container">
