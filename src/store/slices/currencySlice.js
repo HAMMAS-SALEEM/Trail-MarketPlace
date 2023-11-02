@@ -1,15 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const userId = '1aa21774-5750-422e-970a-b31451e74bc5';
+const userId = '5d66d6b9-b8e5-476f-8248-27ca7cf75be1';
 const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
-const url = `https://script.google.com/macros/s/AKfycbxPOGGESaK5wFOKCt1N3bNexeYNtBl3QKjG91lKLGBxB4U2D03AIpHR2crXd2Sj61rm/exec?
+const url = `https://script.google.com/macros/s/AKfycbz35d0Iv8_ujeyod67xLRH6Xu1FXdhGpGwMlzXM1dOZMthD3LoLICoplwtWJExWWweG/exec?
 key=${sheetsKey}&
 graniteUserId=${userId}`;
 
+const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?filters[granite_id][$eq]=${userId}`;
+
 export const fetchCurrency = createAsyncThunk('fetch/currency', async () => {
-    const currency = await fetch(url);
-    return currency.json();
-})
+  const res = await Promise.all([
+    fetch(url),
+    fetch(spentCurrencyURL),
+  ])
+
+  const data = await Promise.all(res.map(r => r.json()));
+  
+  const currency = data.flat();
+  const totalCurrency = currency[0].trails
+  const spentCurrency = currency[1].data[0].attributes.amount_spent;
+  return totalCurrency - spentCurrency;
+});
 
 const CurrencySlice = createSlice({
   name: 'CurrencySlice',
@@ -42,31 +53,3 @@ export default CurrencySlice.reducer
 //   PropertiesService.getScriptProperties().setProperty('API_KEY', apiKey);
 //   return apiKey;
 // }
-
-
-// function doGet(req) {
-//     var apiKey = PropertiesService.getScriptProperties().getProperty('API_KEY');
-//     var recievedKey = req.parameter.key
-//     if(apiKey != recievedKey) {
-//       return 'Access Denied'
-//     }
-//     var graniteUserId = req.parameter.graniteUserId
-//     var doc = SpreadsheetApp.getActiveSpreadsheet();
-//     var sheet = doc.getSheetByName('Sheet1');
-//     var values = sheet.getDataRange().getValues();
-    
-//     var output = [];
-//     for(var i = 0; i<values.length; i++) {
-//       var row = {}
-//       row['graniteUserId'] = values[i][1];
-//       row['timestamp'] = values[i][2];
-//       output.push(row);
-//     }
-  
-//     if(graniteUserId != null) {
-//       var outputToReturn = output.find((obj) => obj.graniteUserId.toString() == graniteUserId.toString())
-//       return ContentService.createTextOutput(JSON.stringify({data: outputToReturn})).setMimeType(ContentService.MimeType.JSON);
-//     }
-  
-//     return ContentService.createTextOutput(JSON.stringify({data: output})).setMimeType(ContentService.MimeType.JSON);
-//   }
