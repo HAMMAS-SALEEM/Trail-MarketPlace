@@ -38,7 +38,6 @@ const CurrencySlice = createSlice({
     .addCase(fetchCurrency.fulfilled, (state, action) => {
       state.status = 'succceeded'
       state.currency = action.payload.toString()
-      console.log(action.payload.toString())
     })
     .addCase(fetchCurrency.rejected, (state, action) => {
         state.status = 'failed'

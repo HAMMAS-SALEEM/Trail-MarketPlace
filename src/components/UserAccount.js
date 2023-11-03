@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import balance from '../assets/balance.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../store/slices/userSlice'
-import { fetchCurrency } from '../store/slices/currencySlice'
 import { Currency } from './Currency'
 
 export const UserAccount = () => {
   const dispatch = useDispatch();
   const user = useSelector(store => store.User);
-
-  console.log(user);
-
   const accessToken = JSON.parse(localStorage.getItem('userInfo')).access_token
+  
   useEffect(()=>{
     dispatch(fetchUser(accessToken));
   }, [dispatch, accessToken])
