@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// const userId = '5d66d6b9-b8e5-476f-8248-27ca7cf75be1';
 const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
 
 export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) => {
@@ -19,13 +18,16 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   const currency = data.flat();
   const totalCurrency = currency[0].trails
   const spentCurrency = currency[1].data[0].attributes.amount_spent;
-  return (totalCurrency - spentCurrency);
+  const calculatedTrails = totalCurrency - spentCurrency;
+  const trails = calculatedTrails.toString();
+  const purchases = currency[1].data[0].attributes.purchases;
+  return ({trails, purchases});
 });
 
 const CurrencySlice = createSlice({
   name: 'CurrencySlice',
   initialState: {
-    currency: {},
+    currency: [],
     status: 'idle',
     error: null,
   },
@@ -37,7 +39,8 @@ const CurrencySlice = createSlice({
     })
     .addCase(fetchCurrency.fulfilled, (state, action) => {
       state.status = 'succceeded'
-      state.currency = action.payload.toString()
+      state.currency = action.payload
+      state.error = null
     })
     .addCase(fetchCurrency.rejected, (state, action) => {
         state.status = 'failed'

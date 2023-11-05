@@ -3,7 +3,7 @@ import { SingleItem } from './SingleItem';
 import { fetchProducts } from '../store/slices/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const Products = () => {
+export const AvailableProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.Products);
 
@@ -27,7 +27,7 @@ export const Products = () => {
           price={item.attributes.cost}
           img={item.attributes.image}
           desc={item.attributes.description}
-          activate={false}
+          active={true}
         />
       ))
     }

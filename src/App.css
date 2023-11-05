@@ -78,3 +78,18 @@ body {
 .login-page {
   margin: 50px 0;
 }
+
+.claim {
+  width: 100px;
+  height: 60px;
+  color: white;
+  margin-top: 5px;
+}
+
+.enable {
+  background-color: green;
+}
+
+.disable {
+  background-color: grey;
+}

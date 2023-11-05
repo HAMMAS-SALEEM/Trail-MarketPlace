@@ -6,16 +6,15 @@ import { Navbar } from "../components/Navbar";
 import { TrailMainHeading } from "../components/TrailMainHeading";
 import { UserAccount } from "../components/UserAccount";
 import { getToken } from "../utils/authGenerators";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAccessToken } from "../store/slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import PurchaseController from "../controllers/purchaseController";
+import { AvailableProducts } from "../components/AvailableProducts";
 
 export const Home = () => {
-  const store = useSelector(store => store.User)
-  const dispatch = useDispatch();
 
-  const handleAccessToken = () => {
-    dispatch(fetchAccessToken());
+  const handleGetPurchase = async () => {
+    const gid = "5d66d6b9-b8e5-476f-8248-27ca7cf75be1"
+    const result = await PurchaseController.getTrailUser(gid);
+    console.log(result.data.data[0].attributes);
   }
 
   //get the code from the url
@@ -34,8 +33,9 @@ export const Home = () => {
       <GraniteAccess />
       <GeneralStore />
       <UserAccount />
-      <Products />
-      <button type="button" onClick={handleAccessToken}>Access Token</button>
+      {/* <Products /> */}
+      <AvailableProducts />
+      <button type="button" onClick={handleGetPurchase}>GetPurchaseData</button>
     </>
   );
 };
