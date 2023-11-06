@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SingleItem = ({name, price, img, desc, active}) => {
+export const SingleItem = ({name, price, img, desc, alreadyPurchased}) => {
   const handleGetCurrency = () => {
 
   }
@@ -10,8 +10,9 @@ export const SingleItem = ({name, price, img, desc, active}) => {
         <span className="single-item-name">{name}</span>
         <span className="single-item-price">Trail ${price}</span>
         <span className="single-item-desc">{desc}</span>
-        <button className="claim enable" type="button" >Claim</button>
-        {active && <button className="claim disable" type="button" disabled>Already Claimed</button>}
+        {alreadyPurchased ?
+        <button className="claim disable" type="button" disabled>Already Claimed</button> :
+        <button className="claim enable" type="button" >Claim</button>}
     </div>
   )
 };

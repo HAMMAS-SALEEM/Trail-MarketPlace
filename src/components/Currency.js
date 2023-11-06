@@ -10,8 +10,6 @@ export const Currency = ({userId}) => {
     dispatch(fetchCurrency(userId));
   }, [dispatch, userId]);
 
-  console.log(currency);
-
   if (currency.status === 'loading' || currency.error === "Cannot read properties of undefined (reading 'attributes')") {
     return (
       <span>loading...</span>

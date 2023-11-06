@@ -16,12 +16,23 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   const data = await Promise.all(res.map(r => r.json()));
   
   const currency = data.flat();
+  const spentCurrencyData = data[1] && data[1].data && data[1].data[0];
+  let result = null;
+  
+  if(spentCurrencyData) {
   const totalCurrency = currency[0].trails
   const spentCurrency = currency[1].data[0].attributes.amount_spent;
   const calculatedTrails = totalCurrency - spentCurrency;
   const trails = calculatedTrails.toString();
   const purchases = currency[1].data[0].attributes.purchases;
-  return ({trails, purchases});
+  result = {trails, purchases}
+  } else {
+    result = {
+      trails: 'N/A',
+      purchases: 'N/A'
+    }
+  }
+  return result;
 });
 
 const CurrencySlice = createSlice({
@@ -38,7 +49,7 @@ const CurrencySlice = createSlice({
       state.status = 'Loading'
     })
     .addCase(fetchCurrency.fulfilled, (state, action) => {
-      state.status = 'succceeded'
+      state.status = 'succeeded'
       state.currency = action.payload
       state.error = null
     })
