@@ -28,7 +28,7 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   result = {trails, purchases}
   } else {
     result = {
-      trails: 'N/A',
+      trails: '0',
       purchases: 'N/A'
     }
   }

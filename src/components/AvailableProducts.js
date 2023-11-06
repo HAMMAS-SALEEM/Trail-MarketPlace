@@ -9,16 +9,20 @@ export const AvailableProducts = () => {
   const products = useSelector((state) => state.Products);
   const purchases = useSelector((state) => state.currency);
 
-  console.log(products, purchases);
-
   const handleBooks = (products, purchases) => {
+    console.log(products, purchases)
+    if(purchases.currency.purchases === 'N/A') {
+      return null;
+    }
 
     const purchasedProductIds = new Set(purchases.currency.purchases);
     const mergedData = products.products.data.map(product => ({
         ...product,
         alreadypurchased: purchasedProductIds.has(product.id)
     }));
-    console.log(mergedData);
+
+    let result = [...mergedData]
+    console.log(result);
     let totalProducts = '';
     totalProducts = mergedData.map((item) => (
       <SingleItem
@@ -27,7 +31,7 @@ export const AvailableProducts = () => {
         price={item.attributes.cost}
         img={item.attributes.image}
         desc={item.attributes.description}
-        alreadyPurchased={false}
+        alreadyPurchased={item.alreadyPurchased}
       />
     ))
     return totalProducts;
