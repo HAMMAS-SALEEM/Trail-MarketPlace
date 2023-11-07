@@ -16,8 +16,6 @@ export const AvailableProducts = () => {
         alreadypurchased: purchasedProductIds.has(product.id)
     }));
 
-    console.log(mergedData)
-
     let totalProducts = '';
     totalProducts = mergedData.map((item) => (
       <SingleItem

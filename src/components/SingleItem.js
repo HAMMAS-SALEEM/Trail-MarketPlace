@@ -1,22 +1,20 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { buyProduct } from '../store/slices/currencySlice';
+import { purchaseProduct } from '../store/slices/currencySlice';
 
 export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
   const [lessAmount, setLessAmount] = useState(false);
   const user = useSelector(store => store.currency);
-  console.log(user);
   const dispatch = useDispatch();
 
   const handleGetCurrency = () => {
     const alreadyPurchasedItems = user.currency.purchases;
-    const currentBalance = +user.currency.trails;
     const balance = user.currency.trails;
     const userId = user.currency.trailUser;
-    const amountAlreadySpent = +user.currency.amountSpent
+    const amountAlreadySpent = +user.currency.amountSpent;
 
     if(price < balance) {
-
       const purchs = [userId, {
         data: {
             purchases: [
@@ -28,6 +26,7 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
       }];
 
       // dispatch(buyProduct(purchs))
+      dispatch(purchaseProduct(purchs))
     } else {
       setLessAmount(!lessAmount)
     }

@@ -33,14 +33,17 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   } else {
     result = {
       trails: '0',
-      purchases: 'N/A'
+      purchases: 'N/A',
+      trailUser: 'N/A',
+      amountSpent: 'N/A',
     }
   }
   return result;
 });
 
 export const buyProduct = createAsyncThunk('buy/product', async (data) => {
-  axios.put(`${BASE_URL}/api/trail-users/${data[0]}`, data[1])
+  const res = await axios.put(`${BASE_URL}/api/trail-users/${data[0]}`, data[1])
+  return [data[1].data, res];
 })
 
 const CurrencySlice = createSlice({
@@ -50,16 +53,32 @@ const CurrencySlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    purchaseProduct(state, action) {
+      const { currency, status, error } = state;
+      return ({
+        currency: {
+          ...currency,
+          trails: +state.currency.trails-(action.payload[1].data.amount_spent),
+          amountSpent: +state.currency.amountSpent+(action.payload[1].data.amount_spent),
+          purchases: [...action.payload[1].data.purchases]
+        },
+        status,
+        error,
+      });
+    }
+  },
   extraReducers: (builder) => {
     builder
     .addCase(fetchCurrency.pending, (state) => {
       state.status = 'Loading'
     })
     .addCase(fetchCurrency.fulfilled, (state, action) => {
+      if(action.payload.trailUser !== 'N/A'){
       state.status = 'succeeded'
       state.currency = action.payload
       state.error = null
+      }
     })
     .addCase(fetchCurrency.rejected, (state, action) => {
         state.status = 'failed'
@@ -68,6 +87,7 @@ const CurrencySlice = createSlice({
   }
 })
 
+export const {purchaseProduct} = CurrencySlice.actions;
 export default CurrencySlice.reducer
 
 // function generateApiKey() {

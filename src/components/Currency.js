@@ -5,6 +5,8 @@ import { fetchCurrency } from '../store/slices/currencySlice';
 export const Currency = ({userId}) => {
   const dispatch = useDispatch();
   const currency = useSelector(store => store.currency);
+  const store = useSelector(store => store)
+  console.log(store);
   
   useEffect(() => {
     dispatch(fetchCurrency(userId));
@@ -24,5 +26,5 @@ export const Currency = ({userId}) => {
 
   return (
     <span>{currency.status === 'succeeded' &&   currency.currency.trails}</span>
-  );
+    );
 };
