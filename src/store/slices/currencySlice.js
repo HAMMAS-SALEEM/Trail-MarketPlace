@@ -51,11 +51,12 @@ const CurrencySlice = createSlice({
   reducers: {
     purchaseProduct(state, action) {
       const { currency, status, error } = state;
+      console.log(action.payload)
       return ({
-        currency: {
+        currency: { 
           ...currency,
           trails: +state.currency.trails-(action.payload[1].data.amount_spent),
-          amountSpent: +state.currency.amountSpent+(action.payload[1].data.amount_spent),
+          amountSpent: (+state.currency.amountSpent+action.payload[1].data.amount_spent),
           purchases: [...action.payload[1].data.purchases]
         },
         status,

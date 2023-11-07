@@ -3,7 +3,6 @@ import { SingleItem } from './SingleItem';
 import { fetchProducts } from '../store/slices/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 export const AvailableProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.Products);
