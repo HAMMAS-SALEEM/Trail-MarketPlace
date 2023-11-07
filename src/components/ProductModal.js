@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { purchaseProduct } from '../store/slices/currencySlice';
 import PurchaseController from '../controllers/purchaseController';
 
-export const ProductModal = ({selectedProduct, handleProductPopup}) => {
+export const ProductModal = ({selectedProduct, handleProductPopup, productName}) => {
   const form = useRef();
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ export const ProductModal = ({selectedProduct, handleProductPopup}) => {
 
   return (
     <form ref={form} onSubmit={sendEmail}>
-      <input type="text" name="product_name" defaultValue="Rig Pack" />
+      <input type="text" name="product_name" defaultValue={productName} disabled />
       <label>Name</label>
       <input type="text" name="user_name" />
       <label>Email</label>

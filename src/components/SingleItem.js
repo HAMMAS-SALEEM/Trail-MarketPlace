@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ProductModal } from './ProductModal';
-
 
 export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -46,7 +45,7 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
         productPopup ? <ProductModal 
         selectedProduct={selectedProduct} 
         handleProductPopup={handleProductPopup}
-        setClaim={setClaim} /> : ''
+        productName={name} /> : ''
       }
     </div>
   )
