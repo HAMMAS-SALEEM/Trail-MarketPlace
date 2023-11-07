@@ -10,6 +10,7 @@ export const ProductModal = ({selectedProduct, handleProductPopup, productName})
 
   const sendEmail = async (e) => {
     e.preventDefault();
+    if(form.current[0].value === productName){
     const res = await PurchaseController.buyProduct(selectedProduct)
     if(res.status === 200) {
       emailjs.sendForm('service_c7a8fas', 'template_iy1fo3l', form.current, 'E84As-WEzq5MmA-3p')
@@ -22,6 +23,9 @@ export const ProductModal = ({selectedProduct, handleProductPopup, productName})
           console.log(error.text);
       });
     }
+  } else {
+    console.log('Kindly write the correct name')
+  }
   };
 
   return (

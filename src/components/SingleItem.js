@@ -8,6 +8,7 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
   const [claim, setClaim] = useState(false);
 
   const user = useSelector(store => store.currency);
+  console.log(user)
 
   const handleProductPopup = () => setProductPopup(!productPopup)
 
