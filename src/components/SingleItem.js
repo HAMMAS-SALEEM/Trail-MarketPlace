@@ -1,12 +1,31 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { buyProduct } from '../store/slices/currencySlice';
 
 export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
   const user = useSelector(store => store.currency)
-  const handleGetCurrency = (event) => {
-    const id = event.target.id
-    console.log(user);
-    
+  const dispatch = useDispatch();
+
+  const handleGetCurrency = () => {
+    const alreadyPurchasedItems = user.currency.purchases;
+    const currentBalance = user.currency.trails;
+    const balance = user.currency.trails;
+    const userId = user.currency.trailUser
+
+    if(price < balance) {
+
+      const purchs = [userId, {
+        data: {
+            purchases: [
+              ...alreadyPurchasedItems,
+              id
+            ],
+            amount_spent: 200+(+price)
+          }
+      }];
+
+      dispatch(buyProduct(purchs))
+    }
   }
   return (
     <div className="single-item-container">

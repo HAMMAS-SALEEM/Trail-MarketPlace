@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { BASE_URL } from "../../config/app.config";
+import axios from "axios";
 
 const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
 
@@ -35,6 +37,10 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   }
   return result;
 });
+
+export const buyProduct = createAsyncThunk('buy/product', async (data) => {
+  axios.put(`${BASE_URL}/api/trail-users/${data[0]}`, data[1])
+})
 
 const CurrencySlice = createSlice({
   name: 'CurrencySlice',
