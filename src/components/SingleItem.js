@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { buyProduct } from '../store/slices/currencySlice';
 
 export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
-  const user = useSelector(store => store.currency)
+  const [lessAmount, setLessAmount] = useState(false);
+  const user = useSelector(store => store.currency);
+  console.log(user);
   const dispatch = useDispatch();
 
   const handleGetCurrency = () => {
     const alreadyPurchasedItems = user.currency.purchases;
-    const currentBalance = user.currency.trails;
+    const currentBalance = +user.currency.trails;
     const balance = user.currency.trails;
-    const userId = user.currency.trailUser
+    const userId = user.currency.trailUser;
+    const amountAlreadySpent = +user.currency.amountSpent
 
     if(price < balance) {
 
@@ -20,13 +23,16 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
               ...alreadyPurchasedItems,
               id
             ],
-            amount_spent: 200+(+price)
+            amount_spent: amountAlreadySpent+(+price)
           }
       }];
 
-      dispatch(buyProduct(purchs))
+      // dispatch(buyProduct(purchs))
+    } else {
+      setLessAmount(!lessAmount)
     }
   }
+
   return (
     <div className="single-item-container">
       <img className="single-item-img" src={img} alt='product' />
@@ -36,6 +42,9 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
       {alreadyPurchased ?
       <button className="claim disable" type="button" >Already Claimed</button> :
       <button className="claim enable" type="button" id={id} onClick={handleGetCurrency}>Claim</button>}
+      {
+        lessAmount ? <span>You don't have enough TRAILS</span> : ''
+      }
     </div>
   )
 };

@@ -23,12 +23,13 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   
   if(spentCurrencyData) {
   const trailUser = currency[1].data[0].id;
+  const amountSpent = currency[1].data[0].attributes.amount_spent;
   const totalCurrency = currency[0].trails
   const spentCurrency = currency[1].data[0].attributes.amount_spent;
   const calculatedTrails = totalCurrency - spentCurrency;
   const trails = calculatedTrails.toString();
   const purchases = currency[1].data[0].attributes.purchases;
-  result = {trails, purchases, trailUser}
+  result = {trails, purchases, trailUser, amountSpent}
   } else {
     result = {
       trails: '0',

@@ -10,11 +10,13 @@ export const AvailableProducts = () => {
   const purchases = useSelector((state) => state.currency);
 
   const handleBooks = (products, purchases) => {
-    const purchasedProductIds = new Set(purchases.currency.purchases);
+    const purchasedProductIds = new Set(purchases.currency.purchases.map(str => parseInt(str, 10)));
     const mergedData = products.products.data.map(product => ({
         ...product,
         alreadypurchased: purchasedProductIds.has(product.id)
     }));
+
+    console.log(mergedData)
 
     let totalProducts = '';
     totalProducts = mergedData.map((item) => (
