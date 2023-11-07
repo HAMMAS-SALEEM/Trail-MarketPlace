@@ -24,5 +24,5 @@ export const Currency = ({userId}) => {
 
   return (
     <span>{currency.status === 'succeeded' &&   currency.currency.trails}</span>
-    );
+  );
 };

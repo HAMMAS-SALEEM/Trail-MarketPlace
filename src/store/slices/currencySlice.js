@@ -41,11 +41,6 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   return result;
 });
 
-export const buyProduct = createAsyncThunk('buy/product', async (data) => {
-  const res = await axios.put(`${BASE_URL}/api/trail-users/${data[0]}`, data[1])
-  return [data[1].data, res];
-})
-
 const CurrencySlice = createSlice({
   name: 'CurrencySlice',
   initialState: {

@@ -47,6 +47,11 @@ class PurchaseController {
   static getTrailUser(gid) {
     return axios.get(`${BASE_URL}/api/trail-users?filters[granite_id][$eq]=${gid}`)
   }
+
+  static async buyProduct(data) {
+    const res = await axios.put(`${BASE_URL}/api/trail-users/${data[0]}`, data[1])
+    return res;
+  }
 };
 
 export default PurchaseController;
