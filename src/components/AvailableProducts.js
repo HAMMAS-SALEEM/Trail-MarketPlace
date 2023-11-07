@@ -8,7 +8,6 @@ export const AvailableProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.Products);
   const purchases = useSelector((state) => state.currency);
-
   const handleBooks = (products, purchases) => {
     const purchasedProductIds = new Set(purchases.currency.purchases);
     const mergedData = products.products.data.map(product => ({
@@ -20,6 +19,7 @@ export const AvailableProducts = () => {
     totalProducts = mergedData.map((item) => (
       <SingleItem
         key={item.id}
+        id={item.id}
         name={item.attributes.name}
         price={item.attributes.cost}
         img={item.attributes.image}
