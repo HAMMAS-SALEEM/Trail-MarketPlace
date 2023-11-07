@@ -26,7 +26,7 @@ export const ProductModal = ({selectedProduct, handleProductPopup, productName})
 
   return (
     <form ref={form} onSubmit={sendEmail}>
-      <input type="text" name="product_name" defaultValue={productName} disabled />
+      <input type="text" name="product_name" readOnly defaultValue={productName}/>
       <label>Name</label>
       <input type="text" name="user_name" />
       <label>Email</label>
