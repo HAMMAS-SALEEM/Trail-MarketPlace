@@ -43,11 +43,10 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
         <img src={token} alt={token} className="single-item-price-logo" />
         <span className="single-item-price">{price}</span>
       </div>
-      {/* <span className="single-item-desc">{desc}</span> */}
-      {/* {alreadyPurchased ?
+      {alreadyPurchased ?
       <button className="claim disable" type="button" >Already Claimed</button> :
       <button className="claim enable" type="button" id={id} onClick={handleGetCurrency}>{claim ? 'Loading...' : 'Claim'}</button>
-      } */}
+      }
       {
         productPopup ? <ProductModal
         selectedProduct={selectedProduct}

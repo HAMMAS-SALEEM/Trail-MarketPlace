@@ -41,23 +41,6 @@
   margin: 50px 0;
 }
 
-.claim {
-  width: 100px;
-  height: 60px;
-  color: white;
-  margin-top: 5px;
-}
-
-.enable {
-  background-color: green;
-}
-
-.disable {
-  background-color: grey;
-}
-
-
-
 /* New Styling Starts here */
 @import url('https://fonts.googleapis.com/css2?family=Piedra&family=Russo+One&display=swap');
 
@@ -119,6 +102,7 @@ body {
   justify-content: space-evenly;
   align-items: center;
   margin-top: 100px;
+  padding-bottom: 100px;
 }
 
 .trail-main-left {
@@ -154,8 +138,8 @@ body {
 
 .items-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  padding-bottom: 50px;
 }
 
 .general-store-container {
@@ -164,8 +148,7 @@ body {
 }
 
 .general-store-logo {
-  width: 632px;
-  height: 408px;
+  width: 40%;
 }
 
 .general-store-heading {
@@ -179,12 +162,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin: 30px;
+  margin: 30px auto 0 auto;
   padding: 30px 0 0 0;
   height: 400px;
   width: 300px;
   border-radius: 5px;
-  box-shadow: 3px 3px 5px 6px #ccc;;
+  box-shadow: 3px 3px 5px 6px #ccc;
+  position: relative;
 }
 
 .single-item-img-container {
@@ -220,4 +204,29 @@ body {
   color: white;
   font-family: 'Piedra', serif;
   font-size: 20px;
+}
+
+.claim {
+  height: 50px;
+  color: white;
+  margin-top: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  font-family: 'Piedra', serif;
+  font-size: 24px;
+}
+
+.single-item-container:hover .claim {
+  visibility: inherit;
+}
+
+.enable {
+  background-color: green;
+}
+
+.disable {
+  background-color: grey;
 }
