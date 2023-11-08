@@ -10,23 +10,23 @@ import { getCookie } from './utils/getCookie';
 import { fetchAccessToken, fetchUser } from './store/slices/userSlice';
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const [session, setSession] = useState(false);
+  // const dispatch = useDispatch();
+  const [session, setSession] = useState(true);
 
-  useEffect(() => {
-    if (!JSON.parse(localStorage.getItem('refreshToken'))) {
-      setSession(false);
-    } else {
-      dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
-      setSession(true);
-    }
-    const interval = setInterval(() => {
-      dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
-    }, 3600000);
-    return () => {
-      clearInterval(interval)
-    };
-  }, [dispatch])
+  // useEffect(() => {
+    // if (!JSON.parse(localStorage.getItem('refreshToken'))) {
+      // setSession(false);
+    // } else {
+      // dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
+      // setSession(true);
+    // }
+    // const interval = setInterval(() => {
+      // dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
+    // }, 3600000);
+    // return () => {
+      // clearInterval(interval)
+    // };
+  // }, [dispatch])
 
   return (
     <BrowserRouter>

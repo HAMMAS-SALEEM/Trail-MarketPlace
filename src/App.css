@@ -26,10 +26,6 @@
     width: 20%;
 }
 
-.general-store {
-    width: 60%;
-}
-
 .user-account-container {
     display: flex;
     justify-content: center;
@@ -39,24 +35,6 @@
 .user-wallet {
     font-weight: bold;
     font-size: 28px;
-}
-
-.items-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-}
-
-.single-item-img {
-  width: 300px;
-}
-
-.single-item-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
 }
 
 .login-page {
@@ -81,7 +59,8 @@
 
 
 /* New Styling Starts here */
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Piedra&family=Russo+One&display=swap');
+
 * {
   font-family: 'Russo One', sans-serif;
 }
@@ -151,7 +130,6 @@ body {
   right: 0;
   width: 160px;
   height: 43px;
-
 }
 
 .mountain-gif {
@@ -168,4 +146,78 @@ body {
 .main-heading,
 .main-description {
   color: #fff;
+}
+
+.products-section {
+  background-color: #F3F3F3;
+}
+
+.items-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+.general-store-container {
+  align-items: center;
+  flex-direction: column;
+}
+
+.general-store-logo {
+  width: 632px;
+  height: 408px;
+}
+
+.general-store-heading {
+  font-size: 64px;
+  color: #333;
+}
+
+.single-item-container {
+  display: flex;
+  background-color: #9cc055;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px;
+  padding: 30px 0 0 0;
+  height: 400px;
+  width: 300px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px 6px #ccc;;
+}
+
+.single-item-img-container {
+  display: flex;
+  justify-content: center;
+  height: 65%;
+  padding: 0 10px;
+}
+
+.single-item-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.single-item-price-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #83B02A;
+}
+
+.single-item-price-logo {
+  width: 25px;
+  height: 25px;
+  margin-right: 7px;
+}
+
+.single-item-name,
+.single-item-price {
+  color: white;
+  font-family: 'Piedra', serif;
+  font-size: 20px;
 }

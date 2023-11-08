@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { ProductModal } from './ProductModal';
+import token from '../assets/Token.png'
 
 export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -8,7 +9,6 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
   const [claim, setClaim] = useState(false);
 
   const user = useSelector(store => store.currency);
-  console.log(user)
 
   const handleProductPopup = () => setProductPopup(!productPopup)
 
@@ -35,18 +35,25 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
 
   return (
     <div className="single-item-container">
-      <img className="single-item-img" src={img} alt='product' />
-      <span className="single-item-name">{name}</span>
-      <span className="single-item-price">Trail ${price}</span>
-      <span className="single-item-desc">{desc}</span>
-      {alreadyPurchased ?
+      <div className="single-item-img-container">
+        <img className="single-item-img" src={img} alt='product' />
+      </div>
+        <span className="single-item-name">{name}</span>
+      <div className="single-item-price-container">
+        <img src={token} alt={token} className="single-item-price-logo" />
+        <span className="single-item-price">{price}</span>
+      </div>
+      {/* <span className="single-item-desc">{desc}</span> */}
+      {/* {alreadyPurchased ?
       <button className="claim disable" type="button" >Already Claimed</button> :
-      <button className="claim enable" type="button" id={id} onClick={handleGetCurrency}>{claim ? 'Loading...' : 'Claim'}</button>}
+      <button className="claim enable" type="button" id={id} onClick={handleGetCurrency}>{claim ? 'Loading...' : 'Claim'}</button>
+      } */}
       {
-        productPopup ? <ProductModal 
-        selectedProduct={selectedProduct} 
+        productPopup ? <ProductModal
+        selectedProduct={selectedProduct}
         handleProductPopup={handleProductPopup}
-        productName={name} /> : ''
+        productName={name}
+        description={desc} /> : ''
       }
     </div>
   )

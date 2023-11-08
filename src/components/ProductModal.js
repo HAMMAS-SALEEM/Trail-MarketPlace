@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { purchaseProduct } from '../store/slices/currencySlice';
 import PurchaseController from '../controllers/purchaseController';
 
-export const ProductModal = ({selectedProduct, handleProductPopup, productName}) => {
+export const ProductModal = ({selectedProduct, handleProductPopup, productName, description}) => {
   const form = useRef();
   const dispatch = useDispatch();
 
