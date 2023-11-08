@@ -5,9 +5,11 @@ import axios from "axios";
 const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
 
 export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) => {
-  const url = `https://script.google.com/macros/s/AKfycbz35d0Iv8_ujeyod67xLRH6Xu1FXdhGpGwMlzXM1dOZMthD3LoLICoplwtWJExWWweG/exec?
+  const url = `https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec?
 key=${sheetsKey}&
 graniteUserId=${userId}`;
+
+// https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec
 
 const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?filters[granite_id][$eq]=${userId}`;
   const res = await Promise.all([
