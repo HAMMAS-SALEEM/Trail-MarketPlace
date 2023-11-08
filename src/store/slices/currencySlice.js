@@ -9,8 +9,6 @@ export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) =
 key=${sheetsKey}&
 graniteUserId=${userId}`;
 
-// https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec
-
 const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?filters[granite_id][$eq]=${userId}`;
   const res = await Promise.all([
     fetch(url),

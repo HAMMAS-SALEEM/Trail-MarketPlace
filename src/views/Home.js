@@ -3,7 +3,6 @@ import { GeneralStore } from "../components/GeneralStore";
 import { GraniteAccess } from "../components/GraniteAccess";
 import { Navbar } from "../components/Navbar";
 import { TrailMainHeading } from "../components/TrailMainHeading";
-import { UserAccount } from "../components/UserAccount";
 import { getToken } from "../utils/authGenerators";
 import { AvailableProducts } from "../components/AvailableProducts";
 
@@ -24,7 +23,6 @@ export const Home = () => {
       <TrailMainHeading />
       <GraniteAccess />
       <GeneralStore />
-      <UserAccount />
       <AvailableProducts />
     </>
   );
