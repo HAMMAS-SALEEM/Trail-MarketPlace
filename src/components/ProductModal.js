@@ -8,6 +8,7 @@ import token from '../assets/Token.png'
 import polygon2 from '../assets/polygon2.svg'
 import congrats from '../assets/congrats.png'
 import { RotatingSquare } from 'react-loader-spinner';
+import { ErrorPopup } from './ErrorPopup';
 
 export const ProductModal = ({selectedProduct, handleProductPopup, product}) => {
   const [purchased, setPurchased] = useState(false);
@@ -17,28 +18,30 @@ export const ProductModal = ({selectedProduct, handleProductPopup, product}) => 
   // const user = useSelector(store => store.User);
   // const dispatch = useDispatch();
 
+  const title = 'Error';
+  const message = 'Try again or Try later'
+
   const handleErrorPopup = () => setError(!error)
 
   const sendEmail = async (e) => {
     e.preventDefault();
-    // if(form.current[0].value === product.name){
+    // form.current[0].value = product.name
       setSpinner(true);
     // const res = await PurchaseController.buyProduct(selectedProduct)
     // if(res.status === 200) {
       // emailjs.sendForm('service_c7a8fas', 'template_iy1fo3l', form.current, 'E84As-WEzq5MmA-3p')
       // .then((result) => {
           // if(result.text) {
+            // setSpinner(false)
             // dispatch(purchaseProduct(selectedProduct));
             // setPurchased(true);
           // }
       // }, (error) => {
-          // setSpinner(false);
-          // setError(true);
+          setSpinner(false);
+          setError(true);
           // return error
       // });
     // }
-  // } else {
-    // console.log('Kindly write the correct name')
   // }
   };
 
@@ -75,6 +78,7 @@ export const ProductModal = ({selectedProduct, handleProductPopup, product}) => 
             <img src={token} alt="single-item-price-logo" className="single-item-price-logo" />
             <span className="single-item-price">{product.price}</span>
           </div>
+          <input type="submit" value="Confirm Order" className="popup-product-submit-btn" />
           {
             spinner ? <div className="spinner-overlay">
               <RotatingSquare
@@ -83,22 +87,10 @@ export const ProductModal = ({selectedProduct, handleProductPopup, product}) => 
               color="#9cc055"
               strokeWidth="10"
               />
-            </div> : 
-            <input type="submit" value="Confirm Order" className="popup-product-submit-btn" />
-          }
-          {
-            error ? <div className="spinner-overlay">
-              <div className="error-popup">
-                <button onClick={handleErrorPopup} className="error-popup-close-btn">X</button>
-                <div>
-                <div className="error-popup-icon">
-                  <span className="error-popup-sign">!</span>
-                  <h3 className="error-popup-title">Error</h3>
-                </div>
-                <p className="error-popup-desc">Please try again or try later</p>
-                </div>
-              </div>
             </div> : ''
+          } 
+          {
+            error ? <ErrorPopup handleErrorPopup={handleErrorPopup} title={title} message={message} /> : ''
           }
         <div className="back-btn-container">
         <button type="button" onClick={handleProductPopup} className="product-modal-navigation-btn">

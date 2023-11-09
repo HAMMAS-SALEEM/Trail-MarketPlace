@@ -11,7 +11,7 @@ export const AvailableProducts = () => {
   // const products = useSelector((state) => state.Products);
   // const purchases = useSelector((state) => state.currency);
 
-  const handleBooks = (products, purchases) => {
+  const handleProducts = (products, purchases) => {
     const purchasedProductIds = new Set(purchases.currency.purchases.map(str => parseInt(str, 10)));
     const mergedData = products.products.data.map(product => ({
         ...product,
@@ -47,7 +47,7 @@ export const AvailableProducts = () => {
       <div className="products-section">
         <GeneralStore />
       <div className="items-container">
-        {(products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleBooks(products, purchases)}
+        {(products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases)}
       </div>
       </div>
   )
