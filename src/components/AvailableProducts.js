@@ -3,13 +3,13 @@ import { SingleItem } from './SingleItem';
 import { fetchProducts } from '../store/slices/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { GeneralStore } from '../components/GeneralStore'
-// import { products, purchases } from './sampleProducts';
+import { products, purchases } from './sampleProducts';
 
 
 export const AvailableProducts = () => {
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.Products);
-  const purchases = useSelector((state) => state.currency);
+  // const dispatch = useDispatch();
+  // const products = useSelector((state) => state.Products);
+  // const purchases = useSelector((state) => state.currency);
 
   const handleBooks = (products, purchases) => {
     const purchasedProductIds = new Set(purchases.currency.purchases.map(str => parseInt(str, 10)));
@@ -33,11 +33,11 @@ export const AvailableProducts = () => {
     return totalProducts;
   }
 
-  useEffect(() => {
-    if(products.status === 'idle'){
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, products.status])
+  // useEffect(() => {
+    // if(products.status === 'idle'){
+      // dispatch(fetchProducts());
+    // }
+  // }, [dispatch, products.status])
 
     if(products.status === 'loading') return <div>Loading...</div>;
 

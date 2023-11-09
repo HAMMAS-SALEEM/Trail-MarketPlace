@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { ProductModal } from './ProductModal';
 import token from '../assets/Token.png'
 
@@ -7,16 +7,21 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [productPopup, setProductPopup] = useState(false);
   const [claim, setClaim] = useState(false);
-
-  const user = useSelector(store => store.currency);
-
+// 
+  // const user = useSelector(store => store.currency);
+// 
   const handleProductPopup = () => setProductPopup(!productPopup)
 
   const handleGetCurrency = async () => {
-    const alreadyPurchasedItems = user.currency.purchases;
-    const balance = user.currency.trails;
-    const userId = user.currency.trailUser;
-    const amountAlreadySpent = +user.currency.amountSpent;
+    // const alreadyPurchasedItems = user.currency.purchases;
+    // const balance = user.currency.trails;
+    // const userId = user.currency.trailUser;
+    // const amountAlreadySpent = +user.currency.amountSpent;
+
+    const alreadyPurchasedItems = [1];
+    const balance = 533;
+    const userId = '5d66d6b9-b8e5-476f-8248-27ca7cf75be1';
+    const amountAlreadySpent = 100;
 
     if(price < balance) {
       const purchs = [userId, {
@@ -51,8 +56,7 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
         productPopup ? <ProductModal
         selectedProduct={selectedProduct}
         handleProductPopup={handleProductPopup}
-        productName={name}
-        description={desc} /> : ''
+        product={{name, desc, img, price}} /> : ''
       }
     </div>
   )

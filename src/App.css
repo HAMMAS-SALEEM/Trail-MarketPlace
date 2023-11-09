@@ -230,3 +230,99 @@ body {
 .disable {
   background-color: grey;
 }
+
+.popup-product {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1CABD8;
+  background-image: url(./assets/purchase_clouds.png), url(./assets/purchase_character.png);
+  background-position: right top, left bottom;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  padding: 50px;
+}
+
+.currency-value-container {
+  min-width: 103px;
+  width: 10%;
+}
+
+.purchase-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.purchase-form-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.hidden-field {
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+}
+
+.purchase-form-inp {
+  margin-top: 5px;
+}
+
+.popup-product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.popup-product-image {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  margin: auto;
+}
+
+.popup-product-name {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+.popup-product-price-container {
+  display: flex;
+  justify-content: center;
+}
+
+.popup-product-submit-btn {
+  width: 150px;
+  height: 30px;
+  color: white;
+  margin: auto;
+  border-radius: 5px;
+  background: #9CC055;
+  cursor: pointer;
+}
+
+.back-btn-container {
+  margin-top: 30px;
+}
+
+.product-modal-navigation-btn,
+.back-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-modal-navigation-btn-polygon {
+  /* width: 12px; */
+  /* height: 12px; */
+  margin-right: 2px;
+}
+
+.product-modal-navigation-btn-text {
+  color: white;
+}

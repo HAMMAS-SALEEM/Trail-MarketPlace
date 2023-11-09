@@ -8,7 +8,7 @@ export const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(store => store.User);
   const accessToken = JSON.parse(localStorage.getItem('userInfo')).access_token
-  // 
+
   useEffect(()=>{
     dispatch(fetchUser(accessToken));
   }, [dispatch, accessToken])
