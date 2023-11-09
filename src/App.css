@@ -5,33 +5,16 @@ html {
 }
 
 #main-logo {
-    width: 1.5in;
+  width: 1.5in;
 }
 
 .trail-main-heading {
-    width: 60%;
-}
-
-.granite-access-btn-container,
-.general-store-container {
-    display: flex;
-    justify-content: center;
+  width: 60%;
 }
 
 .granite-access-btn {
-    width: 20%;
+  width: 200px;
 }
-
-/* .user-account-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-/* .user-wallet {
-  font-weight: bold;
-  font-size: 28px;
-} */
 
 .login-page {
   margin: 50px 0;
@@ -447,4 +430,46 @@ body {
 .footer-rights {
   color: white;
   font-size: 20px;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+}
+
+.login-container {
+  display: flex;
+  height: 80vh;
+  width: 60%;
+}
+
+.login-page-info {
+  background: white;
+  border-radius: 5px 0 0 5px;
+}
+
+.login-page-btn {
+  background-color: #9CC055;
+  width: 100%;
+  border-radius: 0 5px 5px 0;
+}
+
+.login-page-info,
+.login-page-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page-heading {
+  font-size: 25px;
+  color: #E8C304;
+  font-family: 'Piedra', serif;
+}
+
+.login-page-btn-label {
+  color: white;
+  font-size: 30px;
+  font-family: 'Piedra', serif;
 }

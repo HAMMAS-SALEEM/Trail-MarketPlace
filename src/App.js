@@ -6,12 +6,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './routing/ProtectedRoutes';
 import PublicRoutes from './routing/PublicRoutes';
 import { useDispatch } from 'react-redux';
-import { getCookie } from './utils/getCookie';
 import { fetchAccessToken, fetchUser } from './store/slices/userSlice';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const [session, setSession] = useState(true);
+  const [session, setSession] = useState(false);
 
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem('refreshToken'))) {
