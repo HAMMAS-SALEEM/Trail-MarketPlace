@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Currency } from './Currency';
-// import emailjs from '@emailjs/browser';
-// import { useDispatch } from 'react-redux';
-// import { purchaseProduct } from '../store/slices/currencySlice';
-// import PurchaseController from '../controllers/purchaseController';
+import emailjs from '@emailjs/browser';
+import { useDispatch, useSelector } from 'react-redux';
+import { purchaseProduct } from '../store/slices/currencySlice';
+import PurchaseController from '../controllers/purchaseController';
 import token from '../assets/Token.png'
 import polygon2 from '../assets/polygon2.svg'
 import congrats from '../assets/congrats.png'
@@ -15,8 +15,8 @@ export const ProductModal = ({selectedProduct, handleProductPopup, product}) => 
   const [spinner, setSpinner] = useState(false);
   const [error, setError] = useState(false)
   const form = useRef();
-  // const user = useSelector(store => store.User);
-  // const dispatch = useDispatch();
+  const user = useSelector(store => store.User);
+  const dispatch = useDispatch();
 
   const title = 'Error';
   const message = 'Try again or Try later'
@@ -25,25 +25,24 @@ export const ProductModal = ({selectedProduct, handleProductPopup, product}) => 
 
   const sendEmail = async (e) => {
     e.preventDefault();
-    // form.current[0].value = product.name
+    form.current[0].value = product.name
       setSpinner(true);
-    // const res = await PurchaseController.buyProduct(selectedProduct)
-    // if(res.status === 200) {
-      // emailjs.sendForm('service_c7a8fas', 'template_iy1fo3l', form.current, 'E84As-WEzq5MmA-3p')
-      // .then((result) => {
-          // if(result.text) {
-            // setSpinner(false)
-            // dispatch(purchaseProduct(selectedProduct));
-            // setPurchased(true);
-          // }
-      // }, (error) => {
+    const res = await PurchaseController.buyProduct(selectedProduct)
+    if(res.status === 200) {
+      emailjs.sendForm('service_c7a8fas', 'template_iy1fo3l', form.current, 'E84As-WEzq5MmA-3p')
+      .then((result) => {
+          if(result.text) {
+            setSpinner(false)
+            dispatch(purchaseProduct(selectedProduct));
+            setPurchased(true);
+          }
+      }, (error) => {
           setSpinner(false);
           setError(true);
-          // return error
-      // });
-    // }
-  // }
-  };
+          return error
+      });
+    }
+  }
 
   return (
     <> 
@@ -62,7 +61,7 @@ export const ProductModal = ({selectedProduct, handleProductPopup, product}) => 
       </div> :
         <>
         <div className="currency-value-container">
-          <Currency userId='5d66d6b9-b8e5-476f-8248-27ca7cf75be1' />
+          <Currency userId={user.user.sub} />
         </div>
         <form ref={form} onSubmit={sendEmail} className="purchase-form">
         <div className="input-fields purchase-form-inputs">
@@ -105,4 +104,4 @@ export const ProductModal = ({selectedProduct, handleProductPopup, product}) => 
       </div>
     </>
   );
-};
+  }
