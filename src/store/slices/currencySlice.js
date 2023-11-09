@@ -5,7 +5,7 @@ import axios from "axios";
 const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
 
 export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) => {
-  const url = `https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec?
+const url = `https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec?
 key=${sheetsKey}&
 graniteUserId=${userId}`;
 
@@ -27,7 +27,10 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   const totalCurrency = currency[0].trails
   const spentCurrency = currency[1].data[0].attributes.amount_spent;
   const calculatedTrails = totalCurrency - spentCurrency;
-  const trails = calculatedTrails.toString();
+  let trails = 0
+  if(calculatedTrails > 0) {
+    trails = calculatedTrails.toString();
+  }
   const purchases = currency[1].data[0].attributes.purchases;
   result = {trails, purchases, trailUser, amountSpent}
   } else {
