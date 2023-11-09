@@ -1,18 +1,18 @@
 export const products = {
     "products": {
         "data": [
-            // {
-            //     "id": 1,
-            //     "attributes": {
-            //         "name": "1/1 ART VIKING",
-            //         "cost": "100",
-            //         "image": "https://uploads-ssl.webflow.com/62a635bf434916539bf42e7e/62afe1907324d92b1b9d9203_Untitled%20design%20(28)-p-500.png",
-            //         "description": "Airdrop occurs to wallet following Sunday",
-            //         "createdAt": "2023-10-04T04:41:53.700Z",
-            //         "updatedAt": "2023-10-05T12:47:05.191Z",
-            //         "publishedAt": "2023-10-04T04:41:56.650Z"
-            //     }
-            // },
+            {
+                "id": 1,
+                "attributes": {
+                    "name": "1/1 ART VIKING",
+                    "cost": "100",
+                    "image": "https://uploads-ssl.webflow.com/62a635bf434916539bf42e7e/62afe1907324d92b1b9d9203_Untitled%20design%20(28)-p-500.png",
+                    "description": "Airdrop occurs to wallet following Sunday",
+                    "createdAt": "2023-10-04T04:41:53.700Z",
+                    "updatedAt": "2023-10-05T12:47:05.191Z",
+                    "publishedAt": "2023-10-04T04:41:56.650Z"
+                }
+            },
             {
                 "id": 2,
                 "attributes": {
@@ -42,11 +42,9 @@ export const products = {
 export const purchases = {
     "currency": {
         "trails": "533",
-        "purchases": [
-            1
-        ],
+        "purchases": [],
         "trailUser": 1,
-        "amountSpent": "100"
+        "amountSpent": "0"
     },
     "status": "succeeded",
     "error": null
