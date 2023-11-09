@@ -3,8 +3,8 @@ import { SingleItem } from './SingleItem';
 import { fetchProducts } from '../store/slices/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { GeneralStore } from '../components/GeneralStore'
+import { ThreeDots } from 'react-loader-spinner';
 // import { products, purchases } from './sampleProducts';
-
 
 export const AvailableProducts = () => {
   const dispatch = useDispatch();
@@ -39,15 +39,29 @@ export const AvailableProducts = () => {
     }
   }, [dispatch, products.status])
 
-    if(products.status === 'loading') return <div>Loading...</div>;
+    if(products.status === 'loading') return <ThreeDots height="400" width= "400" radius="9" color="#4fa94d" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClassName="" visible={true}/>;
 
     if(products.status === 'failed') return <div>Some Problems Occuring</div>;
 
     return (
       <div className="products-section">
         <GeneralStore />
+        {
+          (products.status !== 'succeeded' || purchases.status !== 'succeeded') && <div className="spinner-products">
+          <ThreeDots 
+          height="400" 
+          width= "400" 
+          radius="9"
+          color="#4fa94d" 
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+         />
+        </div>
+        }
       <div className="items-container">
-        {(products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases)}
+        {(products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases) }
       </div>
       </div>
   )

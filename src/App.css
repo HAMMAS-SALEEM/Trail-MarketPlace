@@ -413,3 +413,9 @@ body {
 .error-popup-sign {
   color: white;
 }
+
+.spinner-products {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
