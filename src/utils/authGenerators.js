@@ -1,8 +1,10 @@
 import axios from "axios";
 import CryptoJS from "crypto-js";
+import { useNavigate } from "react-router-dom";
 
 //get the token by code
 export const getToken = async (code, codeVerifier) => {
+  const navigate = useNavigate();
   const params = {
     grant_type: "authorization_code",
     client_id: process.env.REACT_APP_CLIENT_ID,
@@ -31,6 +33,7 @@ export const getToken = async (code, codeVerifier) => {
     localStorage.setItem('refreshToken', JSON.stringify(response.data.refresh_token));
     localStorage.setItem('userInfo', JSON.stringify(response.data));
     console.log(response.data)
+    navigate('/')
   } catch (error) {
     console.error(error);
   }
