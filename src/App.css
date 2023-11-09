@@ -1,15 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Piedra&family=Russo+One&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
 #main-logo {
     width: 1.5in;
-}
-
-.social-icons-container {
-    display: flex;
-    width: 250px;
-    justify-content: space-around;
-}
-
-.social-icons {
-    width: 0.5in;
 }
 
 .trail-main-heading {
@@ -26,23 +22,20 @@
     width: 20%;
 }
 
-.user-account-container {
+/* .user-account-container {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.user-wallet {
-    font-weight: bold;
-    font-size: 28px;
-}
+/* .user-wallet {
+  font-weight: bold;
+  font-size: 28px;
+} */
 
 .login-page {
   margin: 50px 0;
 }
-
-/* New Styling Starts here */
-@import url('https://fonts.googleapis.com/css2?family=Piedra&family=Russo+One&display=swap');
 
 * {
   font-family: 'Russo One', sans-serif;
@@ -418,4 +411,40 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.footer {
+  padding: 30px 0 0 0;
+}
+
+.footer-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-heading {
+  text-align: center;
+  color: white;
+  font-size: 28px;
+}
+
+.social-icons-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-arrow-image,
+.social-icons-container,
+.footer-clouds-image {
+  width: 50%;
+}
+
+.social-icons {
+  width: 0.5in;
+}
+
+.footer-rights {
+  color: white;
+  font-size: 20px;
 }

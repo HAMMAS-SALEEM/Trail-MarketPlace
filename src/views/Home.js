@@ -3,6 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { TrailMainHeading } from "../components/TrailMainHeading";
 import { getToken } from "../utils/authGenerators";
 import { AvailableProducts } from "../components/AvailableProducts";
+import { Contact } from "../components/Contact";
 
 export const Home = () => {
 
@@ -20,6 +21,7 @@ export const Home = () => {
       <Navbar />
       <TrailMainHeading />
       <AvailableProducts />
+      <Contact />
     </>
   );
 };

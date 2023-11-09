@@ -39,12 +39,10 @@ export const AvailableProducts = () => {
     }
   }, [dispatch, products.status])
 
-    if(products.status === 'loading') return <ThreeDots height="400" width= "400" radius="9" color="#4fa94d" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClassName="" visible={true}/>;
-
     if(products.status === 'failed') return <div>Some Problems Occuring</div>;
 
     return (
-      <div className="products-section">
+      <div className="products-section" id="store">
         <GeneralStore />
         {
           (products.status !== 'succeeded' || purchases.status !== 'succeeded') && <div className="spinner-products">
