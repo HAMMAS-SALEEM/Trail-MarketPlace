@@ -1,29 +1,9 @@
 import axios from "axios";
-
-const dec2hex = (dec) => {
-  return ("0" + dec.toString(16)).substr(-2);
-};
-
-//generate code verifier
-export const generateCodeVerifier = () => {
-  let array = new Uint32Array(56 / 2);
-  window.crypto.getRandomValues(array);
-  return Array.from(array, dec2hex).join("");
-};
-
-//generate code challenge
-export const generateCodeChallenge = async (codeVerifier) => {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(codeVerifier);
-  const buffer = await window.crypto.subtle.digest("SHA-256", data);
-  return btoa(String.fromCharCode(...new Uint8Array(buffer)))
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
-};
+import CryptoJS from "crypto-js";
 
 //get the token by code
 export const getToken = async (code, codeVerifier) => {
+
   const params = {
     grant_type: "authorization_code",
     client_id: process.env.REACT_APP_CLIENT_ID,
@@ -48,9 +28,31 @@ export const getToken = async (code, codeVerifier) => {
         },
       }
     );
-
-    localStorage.setItem("accessToken", response.data.access_token);
+    document.cookie = `accessToken=${response.data.access_token};max-age=3600;path=/; SameSite=None; Secure`;
+    localStorage.setItem('refreshToken', JSON.stringify(response.data.refresh_token));
+    localStorage.setItem('userInfo', JSON.stringify(response.data));
+    console.log(response.data)
   } catch (error) {
     console.error(error);
   }
+};
+
+export const generateCodeVerifier = () => {
+  const rand = new Uint8Array(32);
+  crypto.getRandomValues(rand);
+  const code_verifier = base64URL(new CryptoJS.lib.WordArray.init(rand));
+  return code_verifier;
+};
+
+const base64URL = (string) => {
+  return string
+    .toString(CryptoJS.enc.Base64)
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
+};
+
+//generate code challenge
+export const generateCodeChallenge = async (codeVerifier) => {
+  return base64URL(CryptoJS.SHA256(codeVerifier));
 };

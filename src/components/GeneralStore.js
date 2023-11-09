@@ -1,10 +1,13 @@
 import React from 'react'
-import generalStore from '../assets/GeneralStore.png'
+import marketLogo from '../assets/market.png';
+import storeArrow from '../assets/store_arrow.svg'
 
 export const GeneralStore = () => {
   return (
     <div className="general-store-container"> 
-        <img src={generalStore} alt='general store' className="general-store" />
+        <img src={marketLogo} alt='general store' className="general-store-logo" />
+        <h2 className="general-store-heading">GENERAL STORE</h2>
+        <img src={storeArrow} alt='store arrow' />
     </div>
   )
 }

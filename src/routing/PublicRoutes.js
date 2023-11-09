@@ -1,14 +1,9 @@
-import React, { Suspense } from "react";
-import { Navigate, Outlet } from "react-router-dom";
-import { useCurrentuser } from "../controllers/authContoller";
-import Loader from "../components/ui/Loader";
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { Login } from "../views/Login";
 
-const PublicRoutes = () => {
-  const user = useCurrentuser();
-
-  return !user ? <Suspense fallback={<Loader/>}>
-    <Outlet /> 
-  </Suspense> : <Navigate to={`/home`} />;
+const PublicRoutes = ({session}) => {
+  return session ? <Navigate to='/' /> : <Login/> 
 };
 
 export default PublicRoutes;

@@ -1,33 +1,49 @@
-import { useEffect } from "react";
-import "./App.css";
-import { GeneralStore } from "./components/GeneralStore";
-import { GraniteAccess } from "./components/GraniteAccess";
-import { Items } from "./components/Items";
-import { Navbar } from "./components/Navbar";
-import { TrailMainHeading } from "./components/TrailMainHeading";
-import { UserAccount } from "./components/UserAccount";
-import { getToken } from "./utils/authGenerators";
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import { Login } from './views/Login';
+import { Home } from './views/Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ProtectedRoutes from './routing/ProtectedRoutes';
+import PublicRoutes from './routing/PublicRoutes';
+import { useDispatch } from 'react-redux';
+import { fetchAccessToken, fetchUser } from './store/slices/userSlice';
 
-const App = () => {
-  //get the code from the url
+export const App = () => {
+  const dispatch = useDispatch();
+  const [session, setSession] = useState(false);
+
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-    if (code) {
-      getToken(code, localStorage.getItem("codeVerifier"));
+    if (!JSON.parse(localStorage.getItem('refreshToken'))) {
+      setSession(false);
+    } else {
+      dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
+      setSession(true);
     }
-  }, []);
+    const interval = setInterval(() => {
+      dispatch(fetchAccessToken(JSON.parse(localStorage.getItem('refreshToken'))));
+    }, 3600000);
+    return () => {
+      clearInterval(interval)
+    };
+  }, [dispatch])
 
   return (
-    <>
-      <Navbar />
-      <TrailMainHeading />
-      <GraniteAccess />
-      <GeneralStore />
-      <UserAccount />
-      <Items />
-    </>
-  );
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={
+        <ProtectedRoutes session={session}>
+          <Home />
+        </ProtectedRoutes>
+      }
+      />
+      <Route path='/login' element={
+        <PublicRoutes session={session}>
+          <Login />
+        </PublicRoutes>
+      } />
+    </Routes>
+    </BrowserRouter>
+  )
 };
 
 export default App;
