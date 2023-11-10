@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GraniteAccess } from '../components/GraniteAccess'
 import mountain from '../assets/mountain.gif'
+import { getToken } from '../utils/authGenerators'
 
 export const Login = () => {
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+    if (code) {
+      getToken(code, localStorage.getItem("codeVerifier"));
+    }
+  }, []);
   return (
     <div className="login-page">
       <div className="login-container">
