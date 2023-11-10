@@ -76,8 +76,8 @@ export const AvailableProducts = ({session}) => {
       <div className="items-container">
         {
           (products.status === 'succeeded' && !session) && products.products.data
-          .map((item) => (
-            <Prod img={item.attributes.image} name={item.attributes.name} price={item.attributes.cost} />
+          .map((item, idx) => (
+            <Prod key={idx+item.attributes.image+item.attributes.name+item.attributes.cost} img={item.attributes.image} name={item.attributes.name} price={item.attributes.cost} />
           ))
         }
 

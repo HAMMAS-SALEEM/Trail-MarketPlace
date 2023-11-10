@@ -54,7 +54,7 @@ import { generateCodeVerifier } from './utils/authGenerators';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const [session, setSession] = useState(false);
+  const [session, setSession] = useState(true);
 
   const refreshToken = (localStorage.getItem('refreshToken'));
 
@@ -74,7 +74,7 @@ export const App = () => {
     return () => {
       clearInterval(interval)
     };
-  }, [dispatch])
+  }, [dispatch, refreshToken])
 
   return <Home session={session} />
 };
