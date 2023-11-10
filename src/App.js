@@ -54,7 +54,7 @@ import { generateCodeVerifier } from './utils/authGenerators';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const [session, setSession] = useState(true);
+  const [session, setSession] = useState(false);
 
   const refreshToken = (localStorage.getItem('refreshToken'));
 
