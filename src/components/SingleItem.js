@@ -23,12 +23,7 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
     const userId = user.currency.trailUser;
     const amountAlreadySpent = +user.currency.amountSpent;
 
-    // const alreadyPurchasedItems = [1];
-    // const balance = 33;
-    // const userId = '5d66d6b9-b8e5-476f-8248-27ca7cf75be1';
-    // const amountAlreadySpent = 100;
-
-    if(price < balance) {
+    if(price <= balance) {
       const purchs = [userId, {
         data: {
             purchases: [

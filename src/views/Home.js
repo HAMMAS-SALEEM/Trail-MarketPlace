@@ -5,7 +5,7 @@ import { getToken } from "../utils/authGenerators";
 import { AvailableProducts } from "../components/AvailableProducts";
 import { Contact } from "../components/Contact";
 
-export const Home = () => {
+export const Home = ({session}) => {
 
   // get the code from the url
   useEffect(() => {
@@ -18,9 +18,9 @@ export const Home = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar session={session} />
       <TrailMainHeading />
-      <AvailableProducts />
+      <AvailableProducts session={session} />
       <Contact />
     </>
   );

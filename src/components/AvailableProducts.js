@@ -4,9 +4,10 @@ import { fetchProducts } from '../store/slices/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { GeneralStore } from '../components/GeneralStore'
 import { ThreeDots } from 'react-loader-spinner';
+import { Prod } from './Prod';
 // import { products, purchases } from './sampleProducts';
 
-export const AvailableProducts = () => {
+export const AvailableProducts = ({session}) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.Products);
   const purchases = useSelector((state) => state.currency);
@@ -45,7 +46,21 @@ export const AvailableProducts = () => {
       <div className="products-section" id="store">
         <GeneralStore />
         {
-          (products.status !== 'succeeded' || purchases.status !== 'succeeded') && <div className="spinner-products">
+          session && (products.status !== 'succeeded' || purchases.status !== 'succeeded') && <div className="spinner-products">
+          <ThreeDots 
+          height="400" 
+          width= "400" 
+          radius="9"
+          color="#4fa94d" 
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+         />
+        </div>
+        }
+        {
+          (!session && products.status !== 'succeeded') && <div className="spinner-products">
           <ThreeDots 
           height="400" 
           width= "400" 
@@ -59,6 +74,13 @@ export const AvailableProducts = () => {
         </div>
         }
       <div className="items-container">
+        {
+          (products.status === 'succeeded' && !session) && products.products.data
+          .map((item) => (
+            <Prod img={item.attributes.image} name={item.attributes.name} price={item.attributes.cost} />
+          ))
+        }
+
         {(products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases) }
       </div>
       </div>
