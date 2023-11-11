@@ -47,7 +47,7 @@ export const AvailableProducts = ({session}) => {
     if(products.status === 'idle'){
       dispatch(fetchProducts(pagination));
     }
-  }, [dispatch, products.status])
+  }, [dispatch, products.status, pagination])
 
     if(products.status === 'failed') return <div>Some Problems Occuring</div>;
 

@@ -474,3 +474,11 @@ body {
   font-size: 30px;
   font-family: 'Piedra', serif;
 }
+
+.main-page-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}

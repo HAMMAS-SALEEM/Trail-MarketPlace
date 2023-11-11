@@ -8,6 +8,10 @@ import { ThreeDots } from 'react-loader-spinner';
 export const Currency = ({userId}) => {
   const dispatch = useDispatch();
   const currency = useSelector(store => store.currency);
+
+  const handleLogout = () => {
+    localStorage.clear();
+  }
   
   useEffect(() => {
     if(currency.status !== 'succeeded') {
@@ -36,6 +40,7 @@ export const Currency = ({userId}) => {
   }
 
   return (
+    <>
     <div className="currency-box">
       <img src={polygon} alt="polygon" />
       <span className="currency-value">{
@@ -54,5 +59,7 @@ export const Currency = ({userId}) => {
       }</span>
       <img src={Token} className="currency-icon" alt="currency icon" />
     </div>
+    <button type="button" onClick={handleLogout}>Logout</button>
+    </>
   );
 };
