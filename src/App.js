@@ -64,6 +64,7 @@ export const App = () => {
       // const codeVerifier = generateCodeVerifier();
       // localStorage.setItem("codeVerifier", codeVerifier);
       setSession(false);
+      
     }
     else {
       dispatch(fetchAccessToken(JSON.parse(refreshToken)));
