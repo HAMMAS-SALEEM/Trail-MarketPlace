@@ -60,11 +60,12 @@ export const App = () => {
 
   useEffect(() => {
     if ((!refreshToken) || refreshToken == "undefined") {
-      localStorage.clear();
-      const codeVerifier = generateCodeVerifier();
-      localStorage.setItem("codeVerifier", codeVerifier);
+      // localStorage.clear();
+      // const codeVerifier = generateCodeVerifier();
+      // localStorage.setItem("codeVerifier", codeVerifier);
       setSession(false);
-    } else {
+    }
+    else {
       dispatch(fetchAccessToken(JSON.parse(refreshToken)));
       setSession(true);
     }
@@ -74,7 +75,7 @@ export const App = () => {
     return () => {
       clearInterval(interval)
     };
-  }, [dispatch, refreshToken])
+  }, [refreshToken, dispatch])
 
   return <Home session={session} />
 };
