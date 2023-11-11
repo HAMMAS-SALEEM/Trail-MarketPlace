@@ -3,13 +3,14 @@ import axios from 'axios';
 import { BASE_URL } from "../../config/app.config";
 
 const initialState = {
-    products: {data: [], meta: {total: 0}},
+    products: {data: [], meta: {pagination: {total: 0}}},
     status: 'idle',
     error: null,
 };
 
 export const fetchProducts = createAsyncThunk('FETCH_PRODUCTS', async (start, prevData) => {
   const res = await axios.get(`${BASE_URL}/api/products?pagination[start]=${start}&pagination[limit]=10`);
+  console.log(res.data)
   return res.data
 })
 

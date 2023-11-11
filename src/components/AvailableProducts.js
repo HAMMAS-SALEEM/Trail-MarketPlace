@@ -36,6 +36,7 @@ export const AvailableProducts = ({session}) => {
   }
 
   const handlePagination = () => {
+    console.log(pagination)
     const state = [...products.products.data]
     const nextItem = pagination+10
     dispatch(fetchProducts(nextItem, state))
@@ -91,7 +92,7 @@ export const AvailableProducts = ({session}) => {
 
         {(products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases) }
         {
-          (products.products.meta.total > pagination || pagination === 0) && 
+          (products.products.meta.pagination.total >= pagination) && 
             <button type="button" onClick={handlePagination}>More</button>
         }
       </div>
