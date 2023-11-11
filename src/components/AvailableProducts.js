@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SingleItem } from './SingleItem';
 import { fetchProducts } from '../store/slices/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ export const AvailableProducts = ({session}) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.Products);
   const purchases = useSelector((state) => state.currency);
+  const [pagination, setPagination] = useState(0);
 
   const handleProducts = (products, purchases) => {
     const purchasedProductIds = new Set(purchases.currency.purchases.map(str => parseInt(str, 10)));
@@ -34,9 +35,16 @@ export const AvailableProducts = ({session}) => {
     return totalProducts;
   }
 
+  const handlePagination = () => {
+    const state = [...products.products.data]
+    const nextItem = pagination+10
+    dispatch(fetchProducts(nextItem, state))
+    setPagination(nextItem);
+  }
+
   useEffect(() => {
     if(products.status === 'idle'){
-      dispatch(fetchProducts());
+      dispatch(fetchProducts(pagination));
     }
   }, [dispatch, products.status])
 
@@ -82,6 +90,10 @@ export const AvailableProducts = ({session}) => {
         }
 
         {(products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases) }
+        {
+          (products.products.meta.total > pagination || pagination === 0) && 
+            <button type="button" onClick={handlePagination}>More</button>
+        }
       </div>
       </div>
   )
