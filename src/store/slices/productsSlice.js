@@ -8,16 +8,30 @@ const initialState = {
     error: null,
 };
 
-export const fetchProducts = createAsyncThunk('FETCH_PRODUCTS', async (start, prevData) => {
+export const fetchProducts = createAsyncThunk('FETCH_PRODUCTS', async (start) => {
   const res = await axios.get(`${BASE_URL}/api/products?pagination[start]=${start}&pagination[limit]=10`);
-  console.log(res.data)
   return res.data
 })
 
 export const ProductsSlice = createSlice({
   name: "ProductsSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    clearState(state) {
+      // console.log({
+      //   ...state,
+      //   products: {data: [], meta: {pagination: {total: 0}}},
+      //   status: 'idle',
+      //   error: null,
+      // })
+      return {
+        ...state,
+        products: {data: [], meta: {pagination: {total: 0}}},
+        status: 'idle',
+        error: null,
+      }
+    }
+  },
   extraReducers: (builder) => {
     builder
     .addCase(fetchProducts.pending, (state) => {
@@ -34,4 +48,5 @@ export const ProductsSlice = createSlice({
   }
 })
 
+export const { clearState } = ProductsSlice.actions;
 export default ProductsSlice.reducer;

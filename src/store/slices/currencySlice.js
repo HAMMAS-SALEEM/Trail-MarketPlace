@@ -20,9 +20,23 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
     fetch(spentCurrencyURL),
   ])
 
+  const createdUser = await fetch('https://trailmarket.up.railway.app/api/trail-users', {
+    body: JSON.stringify({
+      "data": {
+        "granite_id": "08072c39-6f65-4f5a-b540-e045e87d9ca3",
+        "amount_spent": 0,
+        "purchases": []
+      }
+    }),
+    method: 'POST'
+  })
+
+  console.log(createdUser);
+
   const data = await Promise.all(res.map(r => r.json()));
   
   const currency = data.flat();
+  console.log(currency);
   const spentCurrencyData = data[1] && data[1].data && data[1].data[0];
   let result = null;
   
@@ -93,9 +107,3 @@ const CurrencySlice = createSlice({
 
 export const {purchaseProduct} = CurrencySlice.actions;
 export default CurrencySlice.reducer
-
-// function generateApiKey() {
-//   var apiKey = Utilities.getUuid(); // Generates a random API key
-//   PropertiesService.getScriptProperties().setProperty('API_KEY', apiKey);
-//   return apiKey;
-// }

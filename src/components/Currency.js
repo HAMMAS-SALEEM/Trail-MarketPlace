@@ -4,6 +4,8 @@ import { fetchCurrency } from '../store/slices/currencySlice';
 import Token from '../assets/Token.png'
 import polygon from '../assets/polygon.svg'
 import { ThreeDots } from 'react-loader-spinner';
+import { signOut } from '../store/slices/sessionSlice';
+import { clearState } from '../store/slices/productsSlice';
 
 export const Currency = ({userId}) => {
   const dispatch = useDispatch();
@@ -11,6 +13,8 @@ export const Currency = ({userId}) => {
 
   const handleLogout = () => {
     localStorage.clear();
+    dispatch(signOut())
+    dispatch(clearState())
   }
   
   useEffect(() => {
