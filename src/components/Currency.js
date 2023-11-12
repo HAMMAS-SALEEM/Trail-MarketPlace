@@ -6,6 +6,7 @@ import polygon from '../assets/polygon.svg'
 import { ThreeDots } from 'react-loader-spinner';
 import { signOut } from '../store/slices/sessionSlice';
 import { clearState } from '../store/slices/productsSlice';
+import arrowDown from '../assets/arrowDown.svg'
 
 export const Currency = ({userId}) => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ export const Currency = ({userId}) => {
   }
 
   return (
-    <>
+    <div className="logout-container">
     <div className="currency-box">
       <img src={polygon} alt="polygon" />
       <span className="currency-value">{
@@ -63,7 +64,10 @@ export const Currency = ({userId}) => {
       }</span>
       <img src={Token} className="currency-icon" alt="currency icon" />
     </div>
-    <button type="button" onClick={handleLogout}>Logout</button>
-    </>
+      <div className="hidden-logout-btn">
+        <img src={arrowDown} alt={arrowDown} className="arrow-down" />
+        <button type="button" onClick={handleLogout} className="logout-btn">LOGOUT</button>
+      </div>
+    </div>
   );
 };

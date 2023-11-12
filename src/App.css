@@ -482,3 +482,40 @@ body {
   height: 100vh;
   background-color: white;
 }
+
+.arrow-down {
+  margin: 7px 0;
+  width: 20px;
+}
+
+.logout-btn {
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #333;
+}
+
+.logout-btn:hover {
+  background-color: #ccc;
+}
+
+.logout-btn:focus {
+  background-color:rgb(156, 156, 156);
+}
+
+.hidden-logout-btn {
+  opacity: 0;
+  transition: all ease-in-out 1s;
+}
+
+.logout-container:hover .hidden-logout-btn {
+  opacity: 1;
+  transition: all ease-in-out 1s;
+}
+
+.logout-container,
+.hidden-logout-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
