@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export const fetchProducts = createAsyncThunk('FETCH_PRODUCTS', async (start) => {
-  const res = await axios.get(`${BASE_URL}/api/products?pagination[start]=${start}&pagination[limit]=10`);
+  const res = await axios.get(`${BASE_URL}/api/products?pagination[start]=${start}&pagination[limit]=10&sort[1]=createdAt:desc`);
   return res.data
 })
 
@@ -17,19 +17,8 @@ export const ProductsSlice = createSlice({
   name: "ProductsSlice",
   initialState,
   reducers: {
-    clearState(state) {
-      // console.log({
-      //   ...state,
-      //   products: {data: [], meta: {pagination: {total: 0}}},
-      //   status: 'idle',
-      //   error: null,
-      // })
-      return {
-        ...state,
-        products: {data: [], meta: {pagination: {total: 0}}},
-        status: 'idle',
-        error: null,
-      }
+    clearState() {
+      return initialState
     }
   },
   extraReducers: (builder) => {
