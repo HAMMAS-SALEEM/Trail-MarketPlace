@@ -92,7 +92,7 @@ export const AvailableProducts = ({session}) => {
 
         {(products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases) }
         {
-          (products.products.meta.pagination.total >= pagination) && 
+          (products.products.meta.pagination.total >= pagination+10 && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') && 
             <button type="button" onClick={handlePagination}>More</button>
         }
       </div>
