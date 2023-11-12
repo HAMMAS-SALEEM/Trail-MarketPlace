@@ -12,7 +12,7 @@ const sheetsKey = 'c30cfe18-e86b-4ae5-b164-ebd1f00e008d'
 // const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
 // const url = `https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec?
 export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) => {
-  const url = `https://script.google.com/macros/s/AKfycbw7fRS8-Rvl54Jp_Cha8UJ-p2Pm8xeNnzM2I0eZGhpT2BD_kK23OT3vxYS1imb0inE6ZQ/exec
+  const url = `https://script.google.com/macros/s/AKfycbw7fRS8-Rvl54Jp_Cha8UJ-p2Pm8xeNnzM2I0eZGhpT2BD_kK23OT3vxYS1imb0inE6ZQ/exec?
 key=${sheetsKey}&
 graniteUserId=${userId}`;
 
