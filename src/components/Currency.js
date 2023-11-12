@@ -18,10 +18,10 @@ export const Currency = ({userId}) => {
   }
   
   useEffect(() => {
-    if(currency.status !== 'succeeded') {
+    if(typeof userId == 'string' && currency.status !== 'succeeded') {
     dispatch(fetchCurrency(userId));
     }
-  }, [dispatch, userId, currency.status]);
+  }, [currency.status, dispatch, userId]);
 
   if (currency.status === 'loading' || currency.error === "Cannot read properties of undefined (reading 'attributes')") {
     return (

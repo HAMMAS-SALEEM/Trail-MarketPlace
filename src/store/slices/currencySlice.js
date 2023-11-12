@@ -14,13 +14,8 @@ const url = `https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f
 key=${sheetsKey}&
 graniteUserId=${userId}`;
 
-const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?filters[granite_id][$eq]=${userId}`;
-  const res = await Promise.all([
-    fetch(url),
-    fetch(spentCurrencyURL),
-  ])
-
-  const createdUser = await fetch('https://trailmarket.up.railway.app/api/trail-users', {
+const createUserId = async () => {
+    return await fetch('https://trailmarket.up.railway.app/api/trail-users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -33,13 +28,26 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
       }
     }),
   })
+}
 
-  console.log(createdUser);
+const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?filters[granite_id][$eq]=${userId}`;
+  const res = await Promise.all([
+    fetch(url),
+    fetch(spentCurrencyURL),
+  ])
 
-  const data = await Promise.all(res.map(r => r.json()));
-  
-  const currency = data.flat();
-  console.log(currency);
+  let ress = await Promise.all(res.map(r => r.json()));
+  let data = ress.flat()
+
+  if(data[1].data.length <= 0) {
+    console.log('User not found');
+    await createUserId().then(res => res.json()).then((data2) => {
+      data = [data[0], {data: [data2.data]}]
+    })
+  }
+
+  let currency = data;
+
   const spentCurrencyData = data[1] && data[1].data && data[1].data[0];
   let result = null;
   
