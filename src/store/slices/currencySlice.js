@@ -21,14 +21,17 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   ])
 
   const createdUser = await fetch('https://trailmarket.up.railway.app/api/trail-users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
-      "data": {
-        "granite_id": "08072c39-6f65-4f5a-b540-e045e87d9ca3",
-        "amount_spent": 0,
-        "purchases": []
+      data: {
+        granite_id: userId,
+        amount_spent: 0,
+        purchases: []
       }
     }),
-    method: 'POST'
   })
 
   console.log(createdUser);
