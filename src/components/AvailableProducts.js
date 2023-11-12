@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GeneralStore } from '../components/GeneralStore'
 import { ThreeDots } from 'react-loader-spinner';
 import { Prod } from './Prod';
-// import { products, purchases } from './sampleProducts';
 import arrowMore from '../assets/arrowMore.svg'
 
 export const AvailableProducts = ({session}) => {
@@ -13,6 +12,7 @@ export const AvailableProducts = ({session}) => {
   const products = useSelector((state) => state.Products);
   const purchases = useSelector((state) => state.currency);
   const [pagination, setPagination] = useState(0);
+  const [paginationLoad, setPaginationLoad]= useState(false);
 
   const handleProducts = (products, purchases) => {
     const purchasedProductIds = new Set(purchases.currency.purchases.map(str => parseInt(str, 10)));
@@ -37,7 +37,7 @@ export const AvailableProducts = ({session}) => {
   }
 
   const handlePagination = () => {
-    console.log(pagination)
+    setPaginationLoad(true);
     const state = [...products.products.data]
     const nextItem = pagination+10
     dispatch(fetchProducts(nextItem, state))
@@ -70,7 +70,7 @@ export const AvailableProducts = ({session}) => {
         </div>
         }
         {
-          (!session && products.status !== 'succeeded') && <div className="spinner-products">
+          (!paginationLoad && !session && products.status !== 'succeeded') && <div className="spinner-products">
           <ThreeDots 
           height="400" 
           width= "400" 
@@ -92,6 +92,20 @@ export const AvailableProducts = ({session}) => {
         }
 
         {(session && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases) }
+        {/* {
+          (paginationLoad && products.status !== 'succeeded') && <div className="spinner-products">
+          <ThreeDots 
+          height="400" 
+          width= "400" 
+          radius="9"
+          color="#4fa94d" 
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+         />
+        </div>
+        } */}
         {
           (session && products.products.meta.pagination.total >= pagination+10 && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') && 
             <button type="button" onClick={handlePagination} className="arrow-more-btn">
