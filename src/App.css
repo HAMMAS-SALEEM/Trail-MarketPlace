@@ -81,38 +81,29 @@ body {
   padding-bottom: 100px;
 }
 
+.trail-main-h1-container {
+  display: flex;
+  justify-content: center;
+}
+
 .trail-main-left {
   position: relative;
-  width: 60%;
+  width: 225px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .main-heading {
-  font-size: 40px;
+  font-size: 30px;
   width: 100px;
   font-weight: 400;
   line-height: 35px;
 }
 
-.meta-mountain-logo {
-  position: absolute;
-  right: 0;
-  width: 160px;
-  height: 43px;
+.main-description {
+  text-align: center;
+  font-size: 9px;
 }
-
-/* .main-heading {
-  font-size: 60px;
-  width: 100px;
-  font-weight: 400;
-  line-height: 55px;
-}
-
-.meta-mountain-logo {
-  position: absolute;
-  right: 0;
-  width: 160px;
-  height: 43px;
-} */
 
 .main-heading,
 .main-description {
@@ -129,7 +120,7 @@ body {
 
 .items-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   padding-bottom: 50px;
 }
 
@@ -144,7 +135,7 @@ body {
 }
 
 .general-store-heading {
-  font-size: 64px;
+  font-size: 30px;
   color: #333;
 }
 
@@ -156,8 +147,8 @@ body {
   justify-content: space-between;
   margin: 30px auto 0 auto;
   padding: 30px 0 0 0;
-  height: 400px;
-  width: 300px;
+  height: 300px;
+  width: 200px;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 6px #ccc;
   position: relative;
@@ -234,25 +225,28 @@ body {
   background-position: right top, left bottom;
   background-size: 50%;
   background-repeat: no-repeat;
-  padding: 50px;
   z-index: 10;
 }
 
 .currency-value-container {
   min-width: 103px;
   width: 10%;
+  position: fixed;
+  top: 20px;
+  left: 20px;
 }
 
 .purchase-form {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
+  margin-top: 100px;
 }
 
 .purchase-form-inputs {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  align-items: center;
 }
 
 .hidden-field {
@@ -263,6 +257,7 @@ body {
 
 .purchase-form-inp {
   margin-top: 5px;
+  width: 300px;
 }
 
 .popup-product-details {
@@ -447,7 +442,7 @@ body {
 
 .footer-rights {
   color: white;
-  font-size: 10px;
+  font-size: 6px;
 }
 
 .login-page {
@@ -558,7 +553,18 @@ body {
   width: 80px;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (max-width: 300px) {
+  .purchase-form-inp {
+    width: 80%;
+  }
+  
+  .popup-product-image {
+    width: 80%;
+    height: 280px;
+  }
+}
+
+@media screen and (min-width: 950px) {
   .trail-main-heading-container {
     flex-direction: row;
   }
@@ -568,20 +574,44 @@ body {
   }
 
   .main-heading {
-    font-size: 60px;
-    width: 100px;
-    font-weight: 400;
+    font-size: 50px;
     line-height: 55px;
+  }
+
+  .main-description {
+    font-size: 13px;
   }
   
   .meta-mountain-logo {
-    position: absolute;
-    right: 0;
+    margin-top: 2px;
     width: 160px;
     height: 43px;
   }
+
   .mountain-gif {
     width: 40%;
+  }
+
+  .general-store-heading {
+    font-size: 64px;
+  }
+
+  .popup-product {
+    padding: 50px 50px 75px 50px;
+  }
+
+  .currency-value-container {
+    position: static;
+  }
+
+  .purchase-form {
+    grid-template-columns: 1fr 1fr;
+    margin-top: 0;
+  }
+
+  .purchase-form-inputs {
+    align-self: flex-start;
+    justify-self: start;
   }
 
   .social-icons {

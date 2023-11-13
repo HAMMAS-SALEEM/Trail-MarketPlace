@@ -9,9 +9,8 @@ export const App = () => {
   const dispatch = useDispatch();
   const session = useSelector(store => store.Session.session)
 
-  const refreshToken = (localStorage.getItem('refreshToken'));
-
   useEffect(() => {
+    const refreshToken = (localStorage.getItem('refreshToken'));
     if ((!refreshToken) || refreshToken == "undefined") {
       dispatch(signOut())
     }
@@ -20,12 +19,14 @@ export const App = () => {
       dispatch(signIn());
     }
     const interval = setInterval(() => {
-      dispatch(fetchAccessToken(JSON.parse(refreshToken)));
+      if (refreshToken && refreshToken !== "undefined") {
+        dispatch(fetchAccessToken(JSON.parse(refreshToken)));
+      }
     }, 3600000);
-    return () => {
+      return () => {
       clearInterval(interval)
-    };
-  }, [refreshToken, dispatch])
+    }
+  }, [dispatch])
 
   return <Home session={session} />
 };
