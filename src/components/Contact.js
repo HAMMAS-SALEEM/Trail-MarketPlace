@@ -4,6 +4,7 @@ import discord from '../assets/discord.png'
 import x from '../assets/x.png'
 import ship from '../assets/ship.png'
 import clouds from '../assets/footer-clouds.png'
+// import bird from '../assets/bird.gif'
 
 export const Contact = () => {
   return (
@@ -23,6 +24,7 @@ export const Contact = () => {
           </a>
         </div>
         <img src={clouds} alt="clouds" className="footer-clouds-image" />
+        {/* <img src={bird} alt="clouds" className="footer-clouds-image" /> */}
         <p className="footer-rights">© 2023 Meta Mountaineers in partnership with Granite Labs</p>
       </div>
     </footer>

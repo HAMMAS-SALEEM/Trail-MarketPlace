@@ -4,37 +4,36 @@ import axios from "axios";
 
 // Acutal Information for BigQuery Sheet
 
-const sheetsKey = 'c30cfe18-e86b-4ae5-b164-ebd1f00e008d'
 // const url = 'https://script.google.com/macros/s/AKfycbw7fRS8-Rvl54Jp_Cha8UJ-p2Pm8xeNnzM2I0eZGhpT2BD_kK23OT3vxYS1imb0inE6ZQ/exec'
+// const sheetsKey = 'c30cfe18-e86b-4ae5-b164-ebd1f00e008d'
 
 
 // Sample Information
-// const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
-// const url = `https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec?
-export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) => {
-  const url = `https://script.google.com/macros/s/AKfycbw7fRS8-Rvl54Jp_Cha8UJ-p2Pm8xeNnzM2I0eZGhpT2BD_kK23OT3vxYS1imb0inE6ZQ/exec?
-key=${sheetsKey}&
-graniteUserId=${userId}`;
 
-const createUserId = async () => {
-    return await fetch('https://trailmarket.up.railway.app/api/trail-users', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      data: {
-        granite_id: userId,
-        amount_spent: 0,
-        purchases: []
-      }
-    }),
-  })
-}
+const url = 'https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec'
+const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
+
+export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) => {
+  const sheetUrl = `${url}?key=${sheetsKey}&graniteUserId=${userId}`;
+  const createUserId = async () => {
+      return await fetch('https://trailmarket.up.railway.app/api/trail-users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data: {
+          granite_id: userId,
+          amount_spent: 0,
+          purchases: []
+        }
+      }),
+    })
+  }
 
 const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?filters[granite_id][$eq]=${userId}`;
   const res = await Promise.all([
-    fetch(url),
+    fetch(sheetUrl),
     fetch(spentCurrencyURL),
   ])
 
@@ -42,7 +41,6 @@ const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?fil
   let data = ress.flat()
 
   if(data[1].data.length <= 0) {
-    console.log('User not found');
     await createUserId().then(res => res.json()).then((data2) => {
       data = [data[0], {data: [data2.data]}]
     })
