@@ -431,7 +431,8 @@ body {
 .footer {
   padding: 30px 0 0 0;
   background-image: url(./assets/bird.gif);
-  background-position-y: -70px;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .footer-details {
@@ -583,6 +584,10 @@ body {
     width: 80%;
     height: 280px;
   }
+
+  .footer {
+    background-position-y: 70px;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -613,7 +618,10 @@ body {
   .logout-container {
     margin: 0 10px;
   }
-
+  
+  .footer {
+    background-position-y: 50px;
+  }
 }
 
 @media screen and (min-width: 768px) {  
