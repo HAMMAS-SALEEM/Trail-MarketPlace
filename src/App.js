@@ -9,13 +9,14 @@ export const App = () => {
   const dispatch = useDispatch();
   const session = useSelector(store => store.Session.session)
 
+  const refToken = (data) => localStorage.getItem(data);
+
   useEffect(() => {
-    const refreshToken = (localStorage.getItem('refreshToken'));
-    if ((!refreshToken) || refreshToken === "undefined") {
+    if ((!refToken('refreshToken')) || refToken('refreshToken') === "undefined" || !refToken('userInfo')) {
       dispatch(signOut())
     }
     else {
-      dispatch(fetchAccessToken(JSON.parse(refreshToken)));
+      dispatch(fetchAccessToken(JSON.parse(refToken())));
       dispatch(signIn());
     }
   }, [dispatch])

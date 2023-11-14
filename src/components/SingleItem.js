@@ -23,7 +23,7 @@ export const SingleItem = ({id, name, price, img, desc, alreadyPurchased}) => {
     const userId = user.currency.trailUser;
     const amountAlreadySpent = +user.currency.amountSpent;
 
-    if(price <= +balance) {
+    if(+price <= +balance) {
       const purchs = [userId, {
         data: {
             purchases: [
