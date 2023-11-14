@@ -60,6 +60,15 @@ body {
   margin-left: 3px;
 }
 
+.currency-retry-button {
+  color: red;
+  font-size: 28px;
+  background-color: white;
+  height: 40px;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
 .nav-links {
   display: flex;
   justify-content: space-between;

@@ -51,6 +51,8 @@ const userSlice = createSlice({
     })
     .addCase(fetchAccessToken.fulfilled, (state, action) => {
         state.access_token_status = 'succeeded'
+        state.access_token_error = null
+        state.error = null
         state.access_token = action.payload.accessToken
         document.cookie = `accessToken=${action.payload.access_token};max-age=3600;path=/; SameSite=None; Secure`;
         localStorage.setItem('userInfo', JSON.stringify(action.payload));
