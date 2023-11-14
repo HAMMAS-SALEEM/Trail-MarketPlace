@@ -1,39 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { SingleItem } from './SingleItem';
 import { fetchProducts } from '../store/slices/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { GeneralStore } from '../components/GeneralStore'
 import { ThreeDots } from 'react-loader-spinner';
 import { Prod } from './Prod';
 import arrowMore from '../assets/arrowMore.svg'
+import { handleProducts } from '../utils/handleProducts';
 
 export const AvailableProducts = ({session}) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.Products);
   const purchases = useSelector((state) => state.currency);
   const [pagination, setPagination] = useState(0);
-
-  const handleProducts = (products, purchases) => {
-    const purchasedProductIds = new Set(purchases.currency.purchases.map(str => parseInt(str, 10)));
-    const mergedData = products.products.data.map(product => ({
-        ...product,
-        alreadypurchased: purchasedProductIds.has(product.id)
-    }));
-
-    let totalProducts = '';
-    totalProducts = mergedData.map((item) => (
-      <SingleItem
-        key={item.id}
-        id={item.id}
-        name={item.attributes.name}
-        price={item.attributes.cost}
-        img={item.attributes.image}
-        desc={item.attributes.description}
-        alreadyPurchased={item.alreadypurchased}
-      />
-    ))
-    return totalProducts;
-  }
 
   const handlePagination = () => {
     const state = [...products.products.data]
@@ -87,7 +65,7 @@ export const AvailableProducts = ({session}) => {
           </div>
         }
         {
-          ((products.status !== 'failed' || purchases.status !== 'failed')) &&
+          ((products.status === 'failed' || purchases.status === 'failed')) &&
           <div className="retry-fetch-project-btn-container">
             <button onClick={retryFetchProducts} className="retry-fetch-projects-button">Retry...</button>
           </div>
