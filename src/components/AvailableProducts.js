@@ -42,6 +42,10 @@ export const AvailableProducts = ({session}) => {
     setPagination(nextItem);
   }
 
+  const retryFetchProducts = () => {
+    dispatch(fetchProducts(pagination))
+  }
+
   useEffect(() => {
     if(products.status === 'idle'){
       dispatch(fetchProducts(pagination));
@@ -82,6 +86,12 @@ export const AvailableProducts = ({session}) => {
             />
           </div>
         }
+        {
+          ((products.status !== 'failed' || purchases.status !== 'failed')) &&
+          <div className="retry-fetch-project-btn-container">
+            <button onClick={retryFetchProducts} className="retry-fetch-projects-button">Retry...</button>
+          </div>
+        }
       <div className="items-container">
         {
           (products.status === 'succeeded' && !session) && products.products.data
@@ -91,20 +101,6 @@ export const AvailableProducts = ({session}) => {
         }
 
         {((session && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A')) &&  handleProducts(products, purchases) }
-        {/* {
-          (paginationLoad && products.status !== 'succeeded') && <div className="spinner-products">
-          <ThreeDots 
-          height="400" 
-          width= "400" 
-          radius="9"
-          color="#4fa94d" 
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{width: "50px"}}
-          wrapperClassName=""
-          visible={true}
-         />
-        </div>
-        } */}
         {
           (session && products.products.meta.pagination.total >= pagination+10 && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') && 
             <button type="button" onClick={handlePagination} className="arrow-more-btn">

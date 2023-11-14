@@ -148,6 +148,18 @@ body {
   color: #333;
 }
 
+.retry-fetch-project-btn-container {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.retry-fetch-projects-button {
+  padding: 3px 5px;
+  background-color: red;
+  color: white;
+  border-radius: 3px;
+}
+
 .single-item-container {
   display: flex;
   background-color: #9cc055;
