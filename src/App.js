@@ -16,7 +16,7 @@ export const App = () => {
       dispatch(signOut())
     }
     else {
-      dispatch(fetchAccessToken(JSON.parse(refToken())));
+      dispatch(fetchAccessToken(JSON.parse(refToken('refreshToken'))));
       dispatch(signIn());
     }
   }, [dispatch])

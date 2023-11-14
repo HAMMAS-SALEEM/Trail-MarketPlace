@@ -1,22 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { BASE_URL } from "../../config/app.config";
-import axios from "axios";
 
 // Acutal Information for BigQuery Sheet
 
-// const url = 'https://script.google.com/macros/s/AKfycbw7fRS8-Rvl54Jp_Cha8UJ-p2Pm8xeNnzM2I0eZGhpT2BD_kK23OT3vxYS1imb0inE6ZQ/exec'
-// const sheetsKey = 'c30cfe18-e86b-4ae5-b164-ebd1f00e008d'
-
+const url = 'https://script.google.com/macros/s/AKfycbw7fRS8-Rvl54Jp_Cha8UJ-p2Pm8xeNnzM2I0eZGhpT2BD_kK23OT3vxYS1imb0inE6ZQ/exec'
+const sheetsKey = 'c30cfe18-e86b-4ae5-b164-ebd1f00e008d'
 
 // Sample Information
 
-const url = 'https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec'
-const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
+// const url = 'https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec'
+// const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
 
 export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) => {
   const sheetUrl = `${url}?key=${sheetsKey}&graniteUserId=${userId}`;
   const createUserId = async () => {
-      return await fetch('https://trailmarket.up.railway.app/api/trail-users', {
+      return await fetch(`${BASE_URL}/api/trail-users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +29,7 @@ export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) =
     })
   }
 
-const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?filters[granite_id][$eq]=${userId}`;
+  const spentCurrencyURL = `${BASE_URL}/api/trail-users?filters[granite_id][$eq]=${userId}`;
   const res = await Promise.all([
     fetch(sheetUrl),
     fetch(spentCurrencyURL),
