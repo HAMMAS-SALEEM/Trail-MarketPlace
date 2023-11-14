@@ -1,7 +1,7 @@
 import React from 'react'
-import { Oval, ThreeCircles } from 'react-loader-spinner'
+import { Oval } from 'react-loader-spinner'
 
-export const Loading = ({status}) => {
+export const Loading = () => {
   return (
     <div className="main-page-loader">
       <Oval

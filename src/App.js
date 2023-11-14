@@ -11,20 +11,12 @@ export const App = () => {
 
   useEffect(() => {
     const refreshToken = (localStorage.getItem('refreshToken'));
-    if ((!refreshToken) || refreshToken == "undefined") {
+    if ((!refreshToken) || refreshToken === "undefined") {
       dispatch(signOut())
     }
     else {
       dispatch(fetchAccessToken(JSON.parse(refreshToken)));
       dispatch(signIn());
-    }
-    const interval = setInterval(() => {
-      if (refreshToken && refreshToken !== "undefined") {
-        dispatch(fetchAccessToken(JSON.parse(refreshToken)));
-      }
-    }, 3600000);
-      return () => {
-      clearInterval(interval)
     }
   }, [dispatch])
 

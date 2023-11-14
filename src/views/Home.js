@@ -6,12 +6,13 @@ import { AvailableProducts } from "../components/AvailableProducts";
 import { Contact } from "../components/Contact";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../components/Loading";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../store/slices/sessionSlice";
 
 export const Home = ({session}) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const userStatus = useSelector(store => store.User)
 
   // get the code from the url
   useEffect(() => {
@@ -30,16 +31,11 @@ export const Home = ({session}) => {
   }, [navigate, dispatch]);
 
   return (
-    <>
-    {
-      <>
-        <Navbar session={session} />
-        <TrailMainHeading />
-        <AvailableProducts session={session} />
-        <Contact />
-        {/* <Loading /> */}
-      </>
-    }
-    </>
+            <>
+              <Navbar session={session} />
+              <TrailMainHeading />
+              <AvailableProducts session={session} />
+              <Contact />
+            </>
   );
 };
