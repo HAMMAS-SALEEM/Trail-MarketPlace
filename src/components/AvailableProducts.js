@@ -12,7 +12,6 @@ export const AvailableProducts = ({session}) => {
   const products = useSelector((state) => state.Products);
   const purchases = useSelector((state) => state.currency);
   const [pagination, setPagination] = useState(0);
-  const [paginationLoad, setPaginationLoad]= useState(false);
 
   const handleProducts = (products, purchases) => {
     const purchasedProductIds = new Set(purchases.currency.purchases.map(str => parseInt(str, 10)));
@@ -37,7 +36,6 @@ export const AvailableProducts = ({session}) => {
   }
 
   const handlePagination = () => {
-    setPaginationLoad(true);
     const state = [...products.products.data]
     const nextItem = pagination+10
     dispatch(fetchProducts(nextItem, state))
@@ -56,32 +54,33 @@ export const AvailableProducts = ({session}) => {
       <div className="products-section" id="store">
         <GeneralStore />
         {
-          session && (products.status !== 'succeeded' || purchases.status !== 'succeeded') && <div className="spinner-products">
+          (session && ((products.status !== 'succeeded' || purchases.status !== 'succeeded'))) && <div className="spinner-products">
           <ThreeDots 
           height="400" 
           width= "400" 
           radius="9"
           color="#4fa94d" 
           ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
+          wrapperStyle={{width: '200px'}}
           wrapperClassName=""
           visible={true}
          />
         </div>
         }
         {
-          (!paginationLoad && !session && products.status !== 'succeeded') && <div className="spinner-products">
-          <ThreeDots 
-          height="400" 
-          width= "400" 
-          radius="9"
-          color="#4fa94d" 
-          ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
-          wrapperClassName=""
-          visible={true}
-         />
-        </div>
+          (!session && products.status !== 'succeeded') && 
+          <div className="spinner-products">
+            <ThreeDots 
+              height="400" 
+              width= "400" 
+              radius="9"
+              color="#4fa94d" 
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{width: '200px'}}
+              wrapperClassName=""
+              visible={true}
+            />
+          </div>
         }
       <div className="items-container">
         {
@@ -91,7 +90,7 @@ export const AvailableProducts = ({session}) => {
           ))
         }
 
-        {(session && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') &&  handleProducts(products, purchases) }
+        {((session && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A')) &&  handleProducts(products, purchases) }
         {/* {
           (paginationLoad && products.status !== 'succeeded') && <div className="spinner-products">
           <ThreeDots 
@@ -100,7 +99,7 @@ export const AvailableProducts = ({session}) => {
           radius="9"
           color="#4fa94d" 
           ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
+          wrapperStyle={{width: "50px"}}
           wrapperClassName=""
           visible={true}
          />
