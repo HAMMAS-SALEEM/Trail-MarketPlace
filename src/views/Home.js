@@ -5,7 +5,7 @@ import { getToken } from "../utils/authGenerators";
 import { AvailableProducts } from "../components/AvailableProducts";
 import { Contact } from "../components/Contact";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signIn } from "../store/slices/sessionSlice";
 
 export const Home = ({session}) => {
