@@ -4,16 +4,28 @@ import { fetchCurrency } from '../store/slices/currencySlice';
 import Token from '../assets/Token.png'
 import polygon from '../assets/polygon.svg'
 import { ThreeDots } from 'react-loader-spinner';
+import { signOut } from '../store/slices/sessionSlice';
+import { clearState } from '../store/slices/productsSlice';
+import arrowDown from '../assets/arrowDown.svg'
+import { renderStatus } from '../store/slices/renderSlice';
 
 export const Currency = ({userId}) => {
   const dispatch = useDispatch();
   const currency = useSelector(store => store.currency);
+  const renderS = useSelector(store => store.Render)
+
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(signOut())
+    dispatch(clearState())
+  }
   
   useEffect(() => {
-    if(currency.status !== 'succeeded') {
-    dispatch(fetchCurrency(userId));
+    if(renderS.session && typeof userId == 'string' && currency.status !== 'succeeded') {
+      dispatch(fetchCurrency(userId));
+      dispatch(renderStatus());
     }
-  }, [dispatch, userId, currency.status]);
+  }, [currency.status, dispatch, userId, renderS]);
 
   if (currency.status === 'loading' || currency.error === "Cannot read properties of undefined (reading 'attributes')") {
     return (
@@ -36,6 +48,7 @@ export const Currency = ({userId}) => {
   }
 
   return (
+    <div className="logout-container">
     <div className="currency-box">
       <img src={polygon} alt="polygon" />
       <span className="currency-value">{
@@ -53,6 +66,11 @@ export const Currency = ({userId}) => {
        />
       }</span>
       <img src={Token} className="currency-icon" alt="currency icon" />
+    </div>
+      <div className="hidden-logout-btn">
+        <img src={arrowDown} alt={arrowDown} className="arrow-down" />
+        <button type="button" onClick={handleLogout} className="logout-btn">LOGOUT</button>
+      </div>
     </div>
   );
 };

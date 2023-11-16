@@ -15,7 +15,7 @@ export const GraniteAccess = () => {
     const codeChallenge = await generateCodeChallenge(codeVerifier);
 
     setLink(
-      `https://api.graniteaccess.io/oidc/auth?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_CALLBACK_URL}&code_challenge=${codeChallenge}&code_challenge_method=S256&scope=openid offline_access&prompt=consent`
+      `${process.env.REACT_APP_AUTH_URL}?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_CALLBACK_URL}&code_challenge=${codeChallenge}&code_challenge_method=S256&scope=openid offline_access&prompt=consent`
     );
   };
 

@@ -5,10 +5,15 @@ import gifMountain from '../assets/mountain.gif'
 export const TrailMainHeading = () => {
   return (
     <section className='trail-main-heading-container' id="home">
-      <div className="trail-main-left">
-        <img src={metaMountain} alt="meta mountain" className="meta-mountain-logo"/>
-        <h1 className="main-heading">TRAIL MARKETPLACE</h1>
-        <p className="main-description">REDEEM AWARDS WITH YOUR TRAIL CURRENCY</p>
+      <div>
+      <div className="trail-main-h1-container">
+        <h1 className="trail-main-left">
+          <span className="main-heading">TRAIL</span>
+          <img src={metaMountain} alt="meta mountain" className="meta-mountain-logo" />
+          <span className="main-heading">MARKETPLACE</span>
+        </h1>
+      </div>
+      <p className="main-description">REDEEM AWARDS WITH YOUR TRAIL CURRENCY</p>
       </div>
       <img src={gifMountain} alt="mountain" className="mountain-gif" />
     </section>

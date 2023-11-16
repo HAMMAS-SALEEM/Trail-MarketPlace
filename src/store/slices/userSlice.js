@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchAccessToken = createAsyncThunk('user/access_token_fetch', async (refreshToken) => {
   const params = `grant_type=refresh_token&refresh_token=${refreshToken}&client_id=2xnSfHwFht2dQVek`;
-  const user = await fetch('https://api.graniteaccess.xyz/oidc/token', {
+  const user = await fetch(process.env.REACT_APP_TOKEN_URL, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -13,7 +13,7 @@ export const fetchAccessToken = createAsyncThunk('user/access_token_fetch', asyn
 })
 
 export const fetchUser = createAsyncThunk('user/fetch', async (accessToken) => {
-  const user = await fetch('https://api.graniteaccess.xyz/oidc/me', {
+  const user = await fetch(process.env.REACT_APP_PROFILE_URL, {
       headers: {
           Authorization: `Bearer ${accessToken}`
       },
@@ -51,6 +51,8 @@ const userSlice = createSlice({
     })
     .addCase(fetchAccessToken.fulfilled, (state, action) => {
         state.access_token_status = 'succeeded'
+        state.access_token_error = null
+        state.error = null
         state.access_token = action.payload.accessToken
         document.cookie = `accessToken=${action.payload.access_token};max-age=3600;path=/; SameSite=None; Secure`;
         localStorage.setItem('userInfo', JSON.stringify(action.payload));

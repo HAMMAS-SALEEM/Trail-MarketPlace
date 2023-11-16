@@ -1,23 +1,56 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../config/app.config";
-import axios from "axios";
+import { API_TOKEN, BASE_URL } from "../../config/app.config";
 
-const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
+// Acutal Information for BigQuery Sheet
+
+const url = 'https://script.google.com/macros/s/AKfycbw7fRS8-Rvl54Jp_Cha8UJ-p2Pm8xeNnzM2I0eZGhpT2BD_kK23OT3vxYS1imb0inE6ZQ/exec'
+const sheetsKey = 'c30cfe18-e86b-4ae5-b164-ebd1f00e008d'
+
+// Sample Information
+
+// const url = 'https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec'
+// const sheetsKey = 'e46e87e7-3f35-4330-83bd-0bca053b14d1';
 
 export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) => {
-const url = `https://script.google.com/macros/s/AKfycbwATm_Pxwmy8YXuCu9DZZHSKb9f3FiqHsLb3sXKBRsxpImQK_0zKOZzo-5D5P4qxwuR/exec?
-key=${sheetsKey}&
-graniteUserId=${userId}`;
+  const sheetUrl = `${url}?key=${sheetsKey}&graniteUserId=${userId}`;
+  const createUserId = async () => {
+      return await fetch(`${BASE_URL}/api/trail-users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${API_TOKEN}`
+      },
+      body: JSON.stringify({
+        data: {
+          granite_id: userId,
+          amount_spent: 0,
+          purchases: []
+        }
+      }),
+    })
+  }
 
-const spentCurrencyURL = `https://trailmarket.up.railway.app/api/trail-users?filters[granite_id][$eq]=${userId}`;
+  const spentCurrencyURL = `${BASE_URL}/api/trail-users?filters[granite_id][$eq]=${userId}`;
   const res = await Promise.all([
-    fetch(url),
-    fetch(spentCurrencyURL),
+    fetch(sheetUrl),
+    fetch(spentCurrencyURL, {
+      headers: {
+        Authorization: `Bearer ${API_TOKEN}`
+      }
+    }),
   ])
 
-  const data = await Promise.all(res.map(r => r.json()));
-  
-  const currency = data.flat();
+  let ress = await Promise.all(res.map(r => r.json()));
+  let data = ress.flat()
+
+  if(data[1].data.length <= 0) {
+    await createUserId().then(res => res.json()).then((data2) => {
+      data = [data[0], {data: [data2.data]}]
+    })
+  }
+
+  let currency = data;
+
   const spentCurrencyData = data[1] && data[1].data && data[1].data[0];
   let result = null;
   
@@ -88,9 +121,3 @@ const CurrencySlice = createSlice({
 
 export const {purchaseProduct} = CurrencySlice.actions;
 export default CurrencySlice.reducer
-
-// function generateApiKey() {
-//   var apiKey = Utilities.getUuid(); // Generates a random API key
-//   PropertiesService.getScriptProperties().setProperty('API_KEY', apiKey);
-//   return apiKey;
-// }
