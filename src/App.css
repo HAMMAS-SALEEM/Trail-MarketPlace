@@ -236,10 +236,6 @@ body {
 .single-item-container:hover .claim {
   visibility: inherit;
 }
-/* 
-.single-item-container:hover {
-  transform: scale(1.1);
-} */
 
 .enable {
   background-color: green;
@@ -386,7 +382,7 @@ body {
 }
 
 .purchased-item-congrats-image {
-  width: 200px;
+  width: 100%;
 }
 
 .spinner-overlay {

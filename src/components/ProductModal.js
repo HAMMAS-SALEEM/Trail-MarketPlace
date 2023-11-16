@@ -6,7 +6,7 @@ import { purchaseProduct } from '../store/slices/currencySlice';
 import PurchaseController from '../controllers/purchaseController';
 import token from '../assets/Token.png'
 import polygon2 from '../assets/polygon2.svg'
-import congrats from '../assets/congrats.png'
+import congrats from '../assets/congrats.gif'
 import { RotatingSquare } from 'react-loader-spinner';
 import { ErrorPopup } from './ErrorPopup';
 
@@ -26,6 +26,7 @@ export const ProductModal = ({selectedProduct, handleProductPopup, product}) => 
   const sendEmail = async (e) => {
     e.preventDefault();
     form.current[0].value = product.name
+    console.log(selectedProduct);
       setSpinner(true);
     const res = await PurchaseController.buyProduct(selectedProduct)
     if(res.status === 200) {

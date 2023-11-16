@@ -59,7 +59,7 @@ export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) =
   const amountSpent = currency[1].data[0].attributes.amount_spent;
   const totalCurrency = currency[0].trails
   const spentCurrency = currency[1].data[0].attributes.amount_spent;
-  const calculatedTrails = Math.abs(totalCurrency) - Math.abs(spentCurrency);
+  const calculatedTrails = totalCurrency - spentCurrency;
   let trails = 0
   if(calculatedTrails > 0) {
     trails = calculatedTrails.toString();
