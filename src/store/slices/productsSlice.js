@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
-import { BASE_URL } from "../../config/app.config";
+import { BASE_URL, API_TOKEN } from "../../config/app.config";
 
 const initialState = {
     products: {data: [], meta: {pagination: {total: 0}}},
@@ -9,7 +9,11 @@ const initialState = {
 };
 
 export const fetchProducts = createAsyncThunk('FETCH_PRODUCTS', async (start) => {
-  const res = await axios.get(`${BASE_URL}/api/products?pagination[start]=${start}&pagination[limit]=10&sort[1]=createdAt:desc`);
+  const res = await axios.get(`${BASE_URL}/api/products?pagination[start]=${start}&pagination[limit]=10&sort[1]=createdAt:desc`, {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`
+    }
+  });
   return res.data
 })
 

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../config/app.config";
+import { API_TOKEN, BASE_URL } from "../../config/app.config";
 
 // Acutal Information for BigQuery Sheet
 
@@ -32,7 +32,11 @@ export const fetchCurrency = createAsyncThunk('fetch/currency', async (userId) =
   const spentCurrencyURL = `${BASE_URL}/api/trail-users?filters[granite_id][$eq]=${userId}`;
   const res = await Promise.all([
     fetch(sheetUrl),
-    fetch(spentCurrencyURL),
+    fetch(spentCurrencyURL, {
+      headers: {
+        Authorization: `Bearer ${API_TOKEN}`
+      }
+    }),
   ])
 
   let ress = await Promise.all(res.map(r => r.json()));

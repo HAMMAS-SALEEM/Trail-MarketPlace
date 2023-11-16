@@ -1,4 +1,4 @@
-import { BASE_URL } from "../config/app.config";
+import { API_TOKEN, BASE_URL } from "../config/app.config";
 import axios from "axios";
 
 class PurchaseController {
@@ -6,9 +6,9 @@ class PurchaseController {
     return new Promise((resolve, reject) => {
       axios
         .post(`${BASE_URL}/api/trail-market/`, data, {
-        //   headers: {
-        //     Authorization: apitoken,
-        //   },
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+          },
         })
         .then((res) => {
           if (res?.data?.success) {
@@ -27,9 +27,9 @@ class PurchaseController {
     return new Promise((resolve, reject) => {
       axios
         .post(`${BASE_URL}/api/trail-market/${id}`, data, {
-        //   headers: {
-        //     Authorization: apitoken,
-        //   },
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+          },
         })
         .then((res) => {
           if (res?.data?.success) {
@@ -49,7 +49,11 @@ class PurchaseController {
   }
 
   static async buyProduct(data) {
-    const res = await axios.put(`${BASE_URL}/api/trail-users/${data[0]}`, data[1])
+    const res = await axios.put(`${BASE_URL}/api/trail-users/${data[0]}`, data[1], {
+      headers: {
+        Authorization: `Bearer ${API_TOKEN}`
+      }
+    })
     return res;
   }
 };

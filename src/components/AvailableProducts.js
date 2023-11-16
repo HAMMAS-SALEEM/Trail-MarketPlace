@@ -6,6 +6,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import { Prod } from './Prod';
 import arrowMore from '../assets/arrowMore.svg'
 import { handleProducts } from '../utils/handleProducts';
+import { MoreButton } from './MoreButton';
 
 export const AvailableProducts = ({session}) => {
   const dispatch = useDispatch();
@@ -80,11 +81,12 @@ export const AvailableProducts = ({session}) => {
 
         {((session && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A')) &&  handleProducts(products, purchases) }
         {
+          (!session && products.products.meta.pagination.total >= pagination+10 && products.status === 'succeeded') && 
+            <MoreButton arrowMore={arrowMore} handlePagination={handlePagination} />
+        }
+        {
           (session && products.products.meta.pagination.total >= pagination+10 && products.status === 'succeeded' && purchases.status === 'succeeded' && purchases.currency.purchases !== 'N/A') && 
-            <button type="button" onClick={handlePagination} className="arrow-more-btn">
-              <span className="arrow-more-btn-text">More</span>
-              <img src={arrowMore} alt={arrowMore} className="arrow-more-btn-icon" />
-            </button>
+            <MoreButton arrowMore={arrowMore} handlePagination={handlePagination} />
         }
       </div>
       </div>

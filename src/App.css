@@ -14,6 +14,11 @@ html {
 
 .granite-access-btn {
   width: 200px;
+  transition: 0.2s ease;
+}
+
+.granite-access-btn:hover {
+  transform: scale(1.1);
 }
 
 .login-page {
@@ -75,10 +80,14 @@ body {
 }
 
 .nav-link {
-  margin: 0 10px;
+  margin: 0 20px;
   font-family: 'Russo One', sans-serif;
   color: #fff;
   font-size: 24px;
+  transition: 0.2s ease;
+}
+.nav-link:hover{
+  color: #ffffffaf;
 }
 
 .trail-main-heading-container {
@@ -140,7 +149,7 @@ body {
 }
 
 .general-store-logo {
-  width: 40%;
+  width: 30%;
 }
 
 .general-store-heading {
@@ -173,6 +182,7 @@ body {
   border-radius: 5px;
   box-shadow: 3px 3px 5px 6px #ccc;
   position: relative;
+  transition: ease 0.1s;
 }
 
 .single-item-img-container {
@@ -226,6 +236,10 @@ body {
 .single-item-container:hover .claim {
   visibility: inherit;
 }
+/* 
+.single-item-container:hover {
+  transform: scale(1.1);
+} */
 
 .enable {
   background-color: green;
@@ -268,6 +282,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 
 .hidden-field {
@@ -278,7 +293,14 @@ body {
 
 .purchase-form-inp {
   margin-top: 5px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
   width: 300px;
+  border: none;
+  outline: none;
+  background-color: #ffffffe9;
 }
 
 .popup-product-details {
@@ -460,6 +482,12 @@ body {
 
 .social-icons {
   width: 25px;
+  opacity: 0.5;
+  transition: 0.2s ease;
+}
+
+.social-icons:hover {
+  transform: scale(1.1);
 }
 
 .footer-rights {
@@ -568,10 +596,10 @@ body {
 
 .arrow-more-btn-icon {
   width: 50px;
-  transition: all ease-in-out 0.1s;
+  transition: all ease-in-out 0.2s;
 }
 
-.arrow-more-btn:hover .arrow-more-btn-icon {
+.arrow-more-btn-icon:hover {
   width: 80px;
 }
 
@@ -603,6 +631,7 @@ body {
     color: #333;
     margin-top: 5px;
     font-size: 17px;
+    transition: 0.2s ease;
   }
 
   .logout-container:hover + .nav-links {
@@ -657,10 +686,11 @@ body {
   }
   
   .nav-link {
-    margin: 0 10px;
+    margin: 0 20px;
     font-family: 'Russo One', sans-serif;
     color: #fff;
     font-size: 24px;
+    transition: 0.2s ease;
   }
 
   .trail-main-heading-container {
@@ -718,6 +748,7 @@ body {
 
   .social-icons {
     width: 0.5in;
+    transition: 0.2s ease;
   }
 
   .footer-rights {
