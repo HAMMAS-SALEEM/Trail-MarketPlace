@@ -7,10 +7,12 @@ import { ThreeDots } from 'react-loader-spinner';
 import { signOut } from '../store/slices/sessionSlice';
 import { clearState } from '../store/slices/productsSlice';
 import arrowDown from '../assets/arrowDown.svg'
+import { renderStatus } from '../store/slices/renderSlice';
 
 export const Currency = ({userId}) => {
   const dispatch = useDispatch();
   const currency = useSelector(store => store.currency);
+  const renderS = useSelector(store => store.Render)
 
   const handleLogout = () => {
     localStorage.clear();
@@ -19,10 +21,11 @@ export const Currency = ({userId}) => {
   }
   
   useEffect(() => {
-    if(typeof userId == 'string' && currency.status !== 'succeeded') {
-    dispatch(fetchCurrency(userId));
+    if(renderS.session && typeof userId == 'string' && currency.status !== 'succeeded') {
+      dispatch(fetchCurrency(userId));
+      dispatch(renderStatus());
     }
-  }, [currency.status, dispatch, userId]);
+  }, [currency.status, dispatch, userId, renderS]);
 
   if (currency.status === 'loading' || currency.error === "Cannot read properties of undefined (reading 'attributes')") {
     return (
