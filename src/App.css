@@ -190,6 +190,12 @@ body {
   justify-content: center;
   height: 65%;
   padding: 0 10px;
+  transition: 0.2s ease;
+}
+
+.single-item-container:hover .single-item-img-container{
+  margin-bottom: 10px;
+  transform: scale(1.1);
 }
 
 .single-item-img {
@@ -238,11 +244,11 @@ body {
 }
 
 .enable {
-  background-color: green;
+  background-color: #356431;
 }
 
 .disable {
-  background-color: grey;
+  background-color: #7F7F7F;
 }
 
 .popup-product {
@@ -278,7 +284,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 7vw;
+  margin-left: 6vw;
 }
 
 .hidden-field {
@@ -289,7 +296,7 @@ body {
 
 .purchase-form-inp {
   margin-top: 5px;
-  padding-left: 10px;
+  padding-left: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 5px;
@@ -297,6 +304,12 @@ body {
   border: none;
   outline: none;
   background-color: #ffffffe9;
+  transition: 0.2s ease;
+  color: #333333;
+}
+
+.purchase-form-inp:focus{
+  padding-left: 10px;
 }
 
 .popup-product-details {
@@ -350,7 +363,11 @@ body {
 }
 
 .product-modal-navigation-btn-text {
+  transition: 0.2s ease;
   color: white;
+}
+.product-modal-navigation-btn-text:hover{
+  margin-left: 5px;
 }
 
 .purchased-item-container {
@@ -587,6 +604,7 @@ body {
 }
 
 .arrow-more-btn-text {
+  color: #505050;
   font-size: 15px;
 }
 
@@ -598,6 +616,20 @@ body {
 .arrow-more-btn-icon:hover {
   width: 80px;
 }
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: #83b02a;
+}
+
 
 @media screen and (max-width: 300px) {
   .purchase-form-inp {
